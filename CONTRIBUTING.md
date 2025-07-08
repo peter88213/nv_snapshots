@@ -12,7 +12,7 @@ For English, this is, for example, `en`, for German, it is `de`.
 
 A "message catalog" is a dictionary for the plugin's messages and menu entries.
 
-For creating a message catalog, you download a template with all English messages from [here](https://github.com/peter88213/nv_collection/blob/main/i18n/messages.pot). 
+For creating a message catalog, you download a template with all English messages from [here](https://github.com/peter88213/nv_snapshots/blob/main/i18n/messages.pot). 
 
 
 Rename `messages.pot` to `<your language code>.po`, then give some specific information in the header data by modifying the following lines:
@@ -43,12 +43,12 @@ Before you distribute your translations, you can convert and install the message
 The plugin needs the message catalog in binary format. This is easily achieved using the **msgfmt.py** converter script. 
 You find it in your Python installation, in the **Tools/i18n** subdirectory. If not, you can download the code from [here](https://github.com/python/cpython/blob/main/Tools/i18n/msgfmt.py)
 
-Name the binary file **nv_collection.mo**. 
+Name the binary file **nv_snapshots.mo**. 
 
 
 ### Install your translation for testing
 
-Add a subdirectory tree to **~/.novx/locale**, and place *nv_collection.mo* there, like this:
+Add a subdirectory tree to **~/.novx/locale**, and place *nv_snapshots.mo* there, like this:
 
 ```
 <your home directory>
@@ -56,14 +56,14 @@ Add a subdirectory tree to **~/.novx/locale**, and place *nv_collection.mo* ther
     └── locale/
         └─ <language code>/
            └─ LC_MESSAGES/
-              └─ nv_collection.mo
+              └─ nv_snapshots.mo
 ```
 
 Then start *novelibre* and see whether your translation works. 
 
 **NOTE:** At startup, *novelibre* tries to load a message dictionary that fits to the system language. If it doesn't find a matching language code in the *locale* directory, it uses English as default language. 
 
-**HINT:** *nv_collection* comes with German translations. Look at the `de` directory tree, if you need an example. 
+**HINT:** *nv_snapshots* comes with German translations. Look at the `de` directory tree, if you need an example. 
 
 
 ### Contribute your translations
@@ -90,7 +90,7 @@ An easy way may be to put a posting in the [novelibre forum](https://github.com/
 │       ├── pgettext.py
 │       ├── translate_de.py
 │       └── translations.py
-└── nv_collection/
+└── nv_snapshots/
     ├── i18n/
     ├── src/
 	 │   └── nvcollectionlib/
