@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 0.3.0
+
+- Handling opening and closing projects.
+- Handling exceptions when collecting snapshots.
+
+API: 5.29
+Based on novelibre 5.29.5
+
+
 ### Version 0.2.0
 
 - Saving snapshot metadata.

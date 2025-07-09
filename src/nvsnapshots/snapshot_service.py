@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/nv_snapshots
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from datetime import datetime
+import glob
 import json
 import os
 from pathlib import Path
@@ -19,7 +20,6 @@ from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
-import glob
 
 
 class SnapshotService(SubController):
@@ -153,6 +153,10 @@ class SnapshotService(SubController):
         self._ui.set_status(message)
         self.refresh()
 
+    def on_close(self):
+        self.prjSnapshots.clear()
+        self.snapshotView.reset_tree()
+
     def on_quit(self):
         """Write back the configuration file.
         
@@ -222,10 +226,14 @@ class SnapshotService(SubController):
 
         for snapshotFile in prjSnapshotFiles:
             zipPath = os.path.join(snapshotDir, snapshotFile)
-            with zipfile.ZipFile(zipPath, 'r') as z:
-                with z.open('meta.json', 'r') as f:
-                    metadata = json.loads(f.read())
-            self.prjSnapshots |= metadata
+            try:
+                with zipfile.ZipFile(zipPath, 'r') as z:
+                    with z.open('meta.json', 'r') as f:
+                        metadata = json.loads(f.read())
+            except:
+                pass
+            else:
+                self.prjSnapshots |= metadata
 
     def _create_document(self, sourcePath, suffix, **kwargs):
         """Create a document from any novx file.

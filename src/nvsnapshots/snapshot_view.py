@@ -4,20 +4,16 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_snapshots
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import os
-from tkinter import filedialog
 from tkinter import ttk
 
+from nvlib.controller.sub_controller import SubController
+from nvlib.gui.widgets.index_card import IndexCard
+from nvlib.novx_globals import Error
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
-from nvsnapshots.platform.platform_settings import MOUSE
 from nvsnapshots.platform.platform_settings import PLATFORM
-from nvlib.controller.sub_controller import SubController
-from nvlib.gui.widgets.index_card import IndexCard
-from nvlib.novx_globals import Error
-from nvlib.novx_globals import norm_path
 import tkinter as tk
 
 
@@ -97,9 +93,12 @@ class SnapshotView(tk.Toplevel, SubController):
         self.isOpen = True
         self.element = {}
 
-    def build_tree(self):
+    def reset_tree(self):
         for node in self._treeView.get_children(''):
             self._treeView.delete(node)
+
+    def build_tree(self):
+        self.reset_tree()
         for snapshotId in self.snapshots:
             self._treeView.insert(
                 '',

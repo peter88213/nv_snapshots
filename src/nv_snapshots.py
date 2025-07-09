@@ -96,9 +96,15 @@ class Plugin(PluginBase):
         self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], self.make_snapshot)
 
     def on_close(self):
-        self.snapshotService.on_quit()
+        """Actions to be performed before a project is closed."""
+        self.snapshotService.on_close()
+
+    def on_open(self):
+        """Actions to be performed after a project is opened."""
+        self.snapshotService.refresh()
 
     def on_quit(self):
+        """Actions to be performed before the application is closed."""
         self.snapshotService.on_quit()
 
     def open_help(self, event=None):
