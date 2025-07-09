@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 0.2.0
+
+- Saving snapshot metadata.
+- Changed the file name scheme. 
+
+API: 5.29
+Based on novelibre 5.29.5
+
+
 ### Version 0.1.0
 
 - Making snapshots.

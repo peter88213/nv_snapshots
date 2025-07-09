@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/nv_snapshots
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from datetime import datetime
+import json
 import os
 from pathlib import Path
 import re
@@ -18,6 +19,7 @@ from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
+from tlv.tlv_helper import from_timestamp
 
 
 class SnapshotService(SubController):
@@ -87,27 +89,58 @@ class SnapshotService(SubController):
                 self._ui.set_status(f'#{_("Action canceled by user")}.')
                 return
 
+        #--- Make sure that a project snapshot subdirectory exists.
         projectDir, projectFile = os.path.split(self._mdl.prjFile.filePath)
         snapshotDir = os.path.join(
             projectDir,
             self.prefs['snapshot_subdir']
         )
         os.makedirs(snapshotDir, exist_ok=True)
+
         prjName, __ = os.path.splitext(projectFile)
-        isoDate = datetime.now().replace(microsecond=0).isoformat()
-        descfile, desc = self._get_snapshot_description()
-        dateStr = isoDate.replace(':', '.')
-        zipPath = f'{snapshotDir}/{prjName}_{dateStr}{self.ZIP_EXTENSION}'
+        prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
+        prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
+        isoDate = prjFileDate.replace(microsecond=0).isoformat()
+        snapshotId = f"{prjName}.{isoDate.replace(':', '.')}"
+        title, desc = self._get_snapshot_description()
+        wordCount, totalCount = self._mdl.prjFile.count_words()
+        snapshotMetadata = {
+            snapshotId: {
+                'title': title,
+                'description': desc,
+                'date': isoDate,
+                'work phase': self._mdl.novel.workPhase,
+                'words used': wordCount,
+                'words total':totalCount,
+            }
+        }
+
+        #--- Write the snapshot.
+        zipPath = os.path.join(
+            snapshotDir,
+            f'{snapshotId}{self.ZIP_EXTENSION}'
+        )
         try:
             with zipfile.ZipFile(zipPath, 'w') as z:
+
+                # Write project file.
                 z.write(
                     self._mdl.prjFile.filePath,
                     arcname=projectFile,
                     compress_type=zipfile.ZIP_DEFLATED,
                 )
+
+                # Write descriptive text file.
                 z.writestr(
-                    descfile,
-                    desc,
+                    f'{self._sanitize_filename(title)}{self.DESC_EXTENSION}',
+                    f'{title}\n\n{desc}',
+                    compress_type=zipfile.ZIP_DEFLATED,
+                )
+
+                # Write JSON metadata file.
+                z.writestr(
+                    'meta.json',
+                    json.dumps(snapshotMetadata),
                     compress_type=zipfile.ZIP_DEFLATED,
                 )
 
@@ -209,11 +242,9 @@ class SnapshotService(SubController):
             self._ui.set_status(f'!{str(ex)}')
 
     def _get_snapshot_description(self):
-        heading = 'Undocumented snapshot'
+        title = 'Undocumented snapshot'
         desc = ''
-        content = f'{heading}\n\n{desc}'
-        filename = f'{self._sanitize_filename(heading)}{self.DESC_EXTENSION}'
-        return filename, content
+        return title, desc
 
     def _sanitize_filename(self, filename):
         # Return filename with disallowed characters removed.
