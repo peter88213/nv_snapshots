@@ -19,7 +19,7 @@ from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
-from tlv.tlv_helper import from_timestamp
+import glob
 
 
 class SnapshotService(SubController):
@@ -68,6 +68,7 @@ class SnapshotService(SubController):
             self.icon = None
 
         self.snapshotView = None
+        self.prjSnapshots = {}
 
     def make_snapshot(self):
         self._ui.restore_status()
@@ -97,6 +98,7 @@ class SnapshotService(SubController):
         )
         os.makedirs(snapshotDir, exist_ok=True)
 
+        #--- Collect project metadata.
         prjName, __ = os.path.splitext(projectFile)
         prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
         prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
@@ -149,6 +151,7 @@ class SnapshotService(SubController):
         else:
             message = f'{_("Snapshot generated")} ({isoDate})'
         self._ui.set_status(message)
+        self.refresh()
 
     def on_quit(self):
         """Write back the configuration file.
@@ -166,6 +169,12 @@ class SnapshotService(SubController):
             elif keyword in self.configuration.settings:
                 self.configuration.settings[keyword] = self.prefs[keyword]
         # self.configuration.write(self.iniFile)
+
+    def refresh(self):
+        self._collect_snapshots()
+        if self.snapshotView:
+            self.snapshotView.snapshots = self.prjSnapshots
+            self.snapshotView.build_tree()
 
     def start_manager(self):
 
@@ -189,6 +198,34 @@ class SnapshotService(SubController):
         )
         if self.icon:
             self.snapshotView.iconphoto(False, self.icon)
+        self.refresh()
+
+    def _collect_snapshots(self):
+        projectDir, projectFile = os.path.split(self._mdl.prjFile.filePath)
+        snapshotDir = os.path.join(
+            projectDir,
+            self.prefs['snapshot_subdir']
+        )
+        if not os.path.isdir(snapshotDir):
+            return
+
+        self.prjSnapshots.clear()
+        prjName, __ = os.path.splitext(projectFile)
+        pattern = f'{prjName}.*{self.ZIP_EXTENSION}'
+        prjSnapshotFiles = glob.glob(
+            pattern,
+            root_dir=snapshotDir,
+        )
+        prjSnapshotFiles.sort()
+        if not prjSnapshotFiles:
+            return
+
+        for snapshotFile in prjSnapshotFiles:
+            zipPath = os.path.join(snapshotDir, snapshotFile)
+            with zipfile.ZipFile(zipPath, 'r') as z:
+                with z.open('meta.json', 'r') as f:
+                    metadata = json.loads(f.read())
+            self.prjSnapshots |= metadata
 
     def _create_document(self, sourcePath, suffix, **kwargs):
         """Create a document from any novx file.

@@ -95,6 +95,18 @@ class SnapshotView(tk.Toplevel, SubController):
         self.geometry(f"{windowSize}{windowPosition}")
 
         self.isOpen = True
+        self.element = {}
+
+    def build_tree(self):
+        for node in self._treeView.get_children(''):
+            self._treeView.delete(node)
+        for snapshotId in self.snapshots:
+            self._treeView.insert(
+                '',
+                'end',
+                snapshotId,
+                text=self.snapshots[snapshotId]['title'],
+        )
 
     def on_quit(self, event=None):
         self.prefs['tree_width'] = self._treeWindow.sashpos(0)
@@ -103,23 +115,16 @@ class SnapshotView(tk.Toplevel, SubController):
         self.isOpen = False
 
     def _on_select_node(self, event=None):
-        self._apply_changes()
-        try:
-            self.nodeId = self.tree.selection()[0]
-            self.element = self.snapshots[self.nodeId]
-        except IndexError:
-            pass
-        except AttributeError:
-            pass
-        else:
-            self._set_element_view()
+        self.nodeId = self._treeView.selection()[0]
+        self.element = self.snapshots[self.nodeId]
+        self._set_element_view()
 
     def _open_help(self, event=None):
         Nvsnapshotshelp.open_help_page()
 
     def _remove_node(self, event=None):
         try:
-            nodeId = self.tree.selection()[0]
+            nodeId = self._treeView.selection()[0]
         except IndexError:
             return
 
@@ -130,9 +135,9 @@ class SnapshotView(tk.Toplevel, SubController):
                 title=FEATURE,
                 parent=self,
             ):
-                if self.tree.prev(nodeId):
-                    self.tree.selection_set(
-                        self.tree.prev(nodeId)
+                if self._treeView.prev(nodeId):
+                    self._treeView.selection_set(
+                        self._treeView.prev(nodeId)
                     )
         except Error as ex:
             self._ui.set_status(str(ex))
@@ -140,10 +145,8 @@ class SnapshotView(tk.Toplevel, SubController):
     def _set_element_view(self, event=None):
         # View the selected element's title and description.
         self._indexCard.bodyBox.clear()
-        if self.element.desc:
-            self._indexCard.bodyBox.set_text(self.element.desc)
-        if self.element.title:
-            self._indexCard.title.set(self.element.title)
+        self._indexCard.bodyBox.set_text(self.element.get('description', ''))
+        self._indexCard.title.set(self.element.get('title', ''))
 
     def _set_title(self):
         if self.title:
