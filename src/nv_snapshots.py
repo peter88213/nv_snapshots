@@ -16,13 +16,15 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 
+from pathlib import Path
+
 from nvsnapshots.nvsnapshots_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_service import SnapshotService
-from pathlib import Path
+from nvsnapshots.nvsnapshots_globals import icons
 import tkinter as tk
 
 
@@ -126,6 +128,8 @@ class Plugin(PluginBase):
             homeDir = str(Path.home()).replace('\\', '/')
             iconPath = f'{homeDir}/.novx/icons/{size}'
             icon = tk.PhotoImage(file=f'{iconPath}/{fileName}')
+            icons['snapshot'] = icon
+
         except:
             icon = None
         return icon

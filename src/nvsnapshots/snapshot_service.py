@@ -20,6 +20,7 @@ from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
+from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 
 
 class SnapshotService(SubController):
@@ -70,7 +71,7 @@ class SnapshotService(SubController):
         self.snapshotView = None
         self.prjSnapshots = {}
 
-    def make_snapshot(self):
+    def make_snapshot(self, event=None):
         self._ui.restore_status()
         self._ui.propertiesView.apply_changes()
         if self._mdl.prjFile is None:
@@ -202,7 +203,17 @@ class SnapshotService(SubController):
         )
         if self.icon:
             self.snapshotView.iconphoto(False, self.icon)
+
+        self._bind_events()
         self.refresh()
+
+    def _bind_events(self):
+        event_callbacks = {
+            '<<make_snapshot>>': self.make_snapshot,
+            '<<open_help>>': self._open_help,
+        }
+        for sequence, callback in event_callbacks.items():
+            self.snapshotView.master.winfo_toplevel().bind(sequence, callback)
 
     def _collect_snapshots(self):
         projectDir, projectFile = os.path.split(self._mdl.prjFile.filePath)
@@ -290,6 +301,9 @@ class SnapshotService(SubController):
         title = 'Undocumented snapshot'
         desc = ''
         return title, desc
+
+    def _open_help(self, event=None):
+        Nvsnapshotshelp.open_help_page()
 
     def _sanitize_filename(self, filename):
         # Return filename with disallowed characters removed.

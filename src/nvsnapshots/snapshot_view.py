@@ -10,11 +10,11 @@ from nvlib.controller.sub_controller import SubController
 from nvlib.gui.widgets.index_card import IndexCard
 from nvlib.novx_globals import Error
 from nvsnapshots.nvsnapshots_globals import FEATURE
-from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.platform.platform_settings import PLATFORM
 import tkinter as tk
+from nvsnapshots.nvsnapshots_globals import icons
 
 
 class SnapshotView(tk.Toplevel, SubController):
@@ -80,11 +80,37 @@ class SnapshotView(tk.Toplevel, SubController):
             label=_('File'),
             menu=self._fileMenu,
         )
+        self._fileMenu.add_command(
+            label=_('Snapshot'),
+            accelerator=KEYS.MAKE_SNAPSHOT[1],
+            image=icons.get('snapshot', None),
+            compound='left',
+            command=self._event('<<make_snapshot>>'),
+        )
+        self._fileMenu.add_command(
+            label=_('Close'),
+            accelerator=KEYS.QUIT_PROGRAM[1],
+            command=self.on_quit,
+        )
+
+        # Help menu.
+        self._helpMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(
+            label=_('Help'),
+            menu=self._helpMenu,
+        )
+        self._helpMenu.add_command(
+            label=_('Online help'),
+            accelerator=KEYS.OPEN_HELP[1],
+            command=self._event('<<open_help>>'),
+        )
+
         #--- Event bindings.
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
         if PLATFORM != 'win':
             self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
-        self.bind(KEYS.OPEN_HELP[0], self._open_help)
+        self.bind(KEYS.MAKE_SNAPSHOT[0], self._event('<<make_snapshot>>'))  # Help
+        self.bind(KEYS.OPEN_HELP[0], self._event('<<open_help>>'))
 
         # Restore last window size.
         self.update_idletasks()
@@ -113,13 +139,22 @@ class SnapshotView(tk.Toplevel, SubController):
         self.destroy()
         self.isOpen = False
 
+    def _event(self, sequence):
+
+        def callback(*_):
+            root = self.master.winfo_toplevel()
+            root.event_generate(sequence)
+
+        return callback
+
     def _on_select_node(self, event=None):
-        self.nodeId = self._treeView.selection()[0]
+        try:
+            self.nodeId = self._treeView.selection()[0]
+        except IndexError:
+            return
+
         self.element = self.snapshots[self.nodeId]
         self._set_element_view()
-
-    def _open_help(self, event=None):
-        Nvsnapshotshelp.open_help_page()
 
     def _remove_node(self, event=None):
         try:
@@ -130,7 +165,7 @@ class SnapshotView(tk.Toplevel, SubController):
         try:
             if self._ui.ask_yes_no(
                 message=_('Delete the selected snapshot?'),
-                detail=self.snapshots[nodeId].title,
+                detail=self.snapshots[nodeId].get('title', ''),
                 title=FEATURE,
                 parent=self,
             ):

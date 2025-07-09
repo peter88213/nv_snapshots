@@ -8,3 +8,6 @@ from nvsnapshots.nvsnapshots_locale import _
 
 FEATURE = _('Snapshots')
 
+icons = {
+    'snapshot': None,
+}
