@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.0\n"
-"POT-Creation-Date: 2025-07-09 13:42:32\n"
+"Project-Id-Version: 0.4.0\n"
+"POT-Creation-Date: 2025-07-10 10:52:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -15,6 +15,12 @@ msgstr ""
 
 
 msgid "Action canceled by user"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Ctrl"
@@ -32,10 +38,19 @@ msgstr ""
 msgid "File type is not supported"
 msgstr ""
 
+msgid "Help"
+msgstr ""
+
 msgid "Major Character"
 msgstr ""
 
 msgid "Minor Character"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Online help"
 msgstr ""
 
 msgid "Save"
@@ -45,6 +60,12 @@ msgid "Save changes?"
 msgstr ""
 
 msgid "Snapshot"
+msgstr ""
+
+msgid "Snapshot already exists"
+msgstr ""
+
+msgid "Snapshot description"
 msgstr ""
 
 msgid "Snapshot failed"

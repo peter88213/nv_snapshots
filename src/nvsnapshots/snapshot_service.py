@@ -21,6 +21,7 @@ from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
+from nvsnapshots.snapshot_dialog import SnapshotDialog
 
 
 class SnapshotService(SubController):
@@ -71,6 +72,15 @@ class SnapshotService(SubController):
         self.snapshotView = None
         self.prjSnapshots = {}
 
+        self._snapshotId = None
+        self._isoDate = None
+        self._projectFile = None
+        self._zipPath = None
+
+        self._ui.root.bind('<<save_snapshot>>', self._save_snapshot)
+        self.snapshotTitle = None
+        self.snapshotComment = None
+
     def make_snapshot(self, event=None):
         self._ui.restore_status()
         self._ui.propertiesView.apply_changes()
@@ -99,60 +109,22 @@ class SnapshotService(SubController):
         )
         os.makedirs(snapshotDir, exist_ok=True)
 
-        #--- Collect project metadata.
+        #--- Check whether the snapshot already exists.
         prjName, __ = os.path.splitext(projectFile)
         prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
         prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
-        isoDate = prjFileDate.replace(microsecond=0).isoformat()
-        snapshotId = f"{prjName}.{isoDate.replace(':', '.')}"
-        title, desc = self._get_snapshot_description()
-        wordCount, totalCount = self._mdl.prjFile.count_words()
-        snapshotMetadata = {
-            snapshotId: {
-                'title': title,
-                'description': desc,
-                'date': isoDate,
-                'work phase': self._mdl.novel.workPhase,
-                'words used': wordCount,
-                'words total':totalCount,
-            }
-        }
-
-        #--- Write the snapshot.
-        zipPath = os.path.join(
+        self._isoDate = prjFileDate.replace(microsecond=0).isoformat()
+        self._snapshotId = f"{prjName}.{self._isoDate.replace(':', '.')}"
+        self._zipPath = os.path.join(
             snapshotDir,
-            f'{snapshotId}{self.ZIP_EXTENSION}'
+            f'{self._snapshotId}{self.ZIP_EXTENSION}'
         )
-        try:
-            with zipfile.ZipFile(zipPath, 'w') as z:
+        if os.path.isfile(self._zipPath):
+            self._ui.set_status(f'#{_("Snapshot already exists")}.')
+            return
 
-                # Write project file.
-                z.write(
-                    self._mdl.prjFile.filePath,
-                    arcname=projectFile,
-                    compress_type=zipfile.ZIP_DEFLATED,
-                )
-
-                # Write descriptive text file.
-                z.writestr(
-                    f'{self._sanitize_filename(title)}{self.DESC_EXTENSION}',
-                    f'{title}\n\n{desc}',
-                    compress_type=zipfile.ZIP_DEFLATED,
-                )
-
-                # Write JSON metadata file.
-                z.writestr(
-                    'meta.json',
-                    json.dumps(snapshotMetadata),
-                    compress_type=zipfile.ZIP_DEFLATED,
-                )
-
-        except Exception as ex:
-            message = f'!{_("Snapshot failed")}: {str(ex)}'
-        else:
-            message = f'{_("Snapshot generated")} ({isoDate})'
-        self._ui.set_status(message)
-        self.refresh()
+        #--- Open a dialog for title/comment input.
+        SnapshotDialog(self._ui, self)
 
     def on_close(self):
         self.prjSnapshots.clear()
@@ -297,14 +269,59 @@ class SnapshotService(SubController):
         except Error as ex:
             self._ui.set_status(f'!{str(ex)}')
 
-    def _get_snapshot_description(self):
-        title = 'Undocumented snapshot'
-        desc = ''
-        return title, desc
-
     def _open_help(self, event=None):
         Nvsnapshotshelp.open_help_page()
 
     def _sanitize_filename(self, filename):
         # Return filename with disallowed characters removed.
         return re.sub(r'[\\|\/|\:|\*|\?|\"|\<|\>|\|]+', '', filename)
+
+    def _save_snapshot(self, event=None):
+        #--- Collect project metadata.
+        wordCount, totalCount = self._mdl.prjFile.count_words()
+        snapshotMetadata = {
+            self._snapshotId: {
+                'title': self.snapshotTitle,
+                'description': self.snapshotComment,
+                'date': self._isoDate,
+                'work phase': self._mdl.novel.workPhase,
+                'words used': wordCount,
+                'words total':totalCount,
+            }
+        }
+
+        #--- Write the snapshot.
+        try:
+            with zipfile.ZipFile(self._zipPath, 'w') as z:
+
+                # Write project file.
+                z.write(
+                    self._mdl.prjFile.filePath,
+                    arcname=self._projectFile,
+                    compress_type=zipfile.ZIP_DEFLATED,
+                )
+
+                # Write descriptive text file.
+                z.writestr(
+                    (
+                        f'{self._sanitize_filename(self.snapshotTitle)}'
+                        f'{self.DESC_EXTENSION}'
+                    ),
+                    f'{self.snapshotTitle}\n\n{self.snapshotComment}',
+                    compress_type=zipfile.ZIP_DEFLATED,
+                )
+
+                # Write JSON metadata file.
+                z.writestr(
+                    'meta.json',
+                    json.dumps(snapshotMetadata),
+                    compress_type=zipfile.ZIP_DEFLATED,
+                )
+
+        except Exception as ex:
+            message = f'!{_("Snapshot failed")}: {str(ex)}'
+        else:
+            message = f'{_("Snapshot generated")} ({self._isoDate})'
+        self._ui.set_status(message)
+        self.refresh()
+

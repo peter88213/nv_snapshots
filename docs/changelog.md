@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### Version 0.4.0
+
+- Snapshot description pop-up working.
+
+API: 5.29
+Based on novelibre 5.29.5
+
 
 ### Version 0.3.0
 

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.0\n"
-"POT-Creation-Date: 2025-07-09 13:42:32\n"
-"PO-Revision-Date: 2025-07-09 13:42:32\n"
+"Project-Id-Version: 0.4.0\n"
+"POT-Creation-Date: 2025-07-10 10:52:02\n"
+"PO-Revision-Date: 2025-07-10 10:52:02\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,12 @@ msgstr ""
 
 msgid "Action canceled by user"
 msgstr "Vorgang vom Benutzer abgebrochen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Close"
+msgstr "Schließen"
 
 msgid "Ctrl"
 msgstr "Strg"
@@ -31,11 +37,20 @@ msgstr "Datei nicht gefunden"
 msgid "File type is not supported"
 msgstr "Dateityp wird nicht unterstützt"
 
+msgid "Help"
+msgstr "Hilfe"
+
 msgid "Major Character"
 msgstr "Hauptfigur"
 
 msgid "Minor Character"
 msgstr "Nebenfigur"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Online help"
+msgstr "Online-Hilfe"
 
 msgid "Save"
 msgstr "Speichern"
@@ -45,6 +60,12 @@ msgstr "Änderungen speichern?"
 
 msgid "Snapshot"
 msgstr "Schnappschuss"
+
+msgid "Snapshot already exists"
+msgstr "Schnappschuss existiert schon"
+
+msgid "Snapshot description"
+msgstr "Schnappschuss-Beschreibung"
 
 msgid "Snapshot failed"
 msgstr "Schnappschuss fehlgeschlagen"

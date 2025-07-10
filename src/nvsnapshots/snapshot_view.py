@@ -130,7 +130,7 @@ class SnapshotView(tk.Toplevel, SubController):
                 '',
                 'end',
                 snapshotId,
-                text=self.snapshots[snapshotId]['title'],
+                text=snapshotId,
         )
 
     def on_quit(self, event=None):
