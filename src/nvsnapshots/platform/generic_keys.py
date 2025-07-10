@@ -9,6 +9,7 @@ from nvsnapshots.nvsnapshots_locale import _
 
 class GenericKeys:
 
+    DELETE = ('<Delete>', _('Del'))
     OPEN_HELP = ('<F1>', 'F1')
     QUIT_PROGRAM = ('<Control-q>', f'{_("Ctrl")}-Q')
     MAKE_SNAPSHOT = ('<Control-Alt-s>', f'{_("Ctrl")}-Alt-S')

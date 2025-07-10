@@ -8,7 +8,6 @@ from tkinter import ttk
 
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.widgets.index_card import IndexCard
-from nvlib.novx_globals import Error
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
@@ -62,7 +61,6 @@ class SnapshotView(tk.Toplevel, SubController):
         self._treeView.pack(side='left')
         self._treeWindow.add(self._treeView)
         self._treeView.bind('<<TreeviewSelect>>', self._on_select_node)
-        self._treeView.bind('<Delete>', self._remove_node)
 
         #--- "Index card" in the right frame.
         self._indexCard = IndexCard(self._treeWindow, bd=2, relief='ridge')
@@ -87,6 +85,17 @@ class SnapshotView(tk.Toplevel, SubController):
             compound='left',
             command=self._event('<<make_snapshot>>'),
         )
+        self._fileMenu.add_separator()
+        self._fileMenu.add_command(
+            label=_('Remove'),
+            accelerator=KEYS.DELETE[1],
+            command=self._event('<<remove_snapshot>>'),
+        )
+        self._fileMenu.add_command(
+            label=_('Revert'),
+            command=self._event('<<revert>>'),
+        )
+        self._fileMenu.add_separator()
         self._fileMenu.add_command(
             label=_('Close'),
             accelerator=KEYS.QUIT_PROGRAM[1],
@@ -109,8 +118,9 @@ class SnapshotView(tk.Toplevel, SubController):
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
         if PLATFORM != 'win':
             self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
-        self.bind(KEYS.MAKE_SNAPSHOT[0], self._event('<<make_snapshot>>'))  # Help
+        self.bind(KEYS.MAKE_SNAPSHOT[0], self._event('<<make_snapshot>>'))
         self.bind(KEYS.OPEN_HELP[0], self._event('<<open_help>>'))
+        self.bind(KEYS.DELETE[0], self._event('<<remove_snapshot>>'))
 
         # Restore last window size.
         self.update_idletasks()
@@ -118,6 +128,14 @@ class SnapshotView(tk.Toplevel, SubController):
 
         self.isOpen = True
         self.element = {}
+
+    def get_selection(self):
+        try:
+            nodeId = self._treeView.selection()[0]
+        except IndexError:
+            return None
+        else:
+            return nodeId
 
     def reset_tree(self):
         for node in self._treeView.get_children(''):
@@ -132,6 +150,12 @@ class SnapshotView(tk.Toplevel, SubController):
                 snapshotId,
                 text=snapshotId,
         )
+        self._indexCard.bodyBox.config(state='normal')
+        self._indexCard.bodyBox.clear()
+        self._indexCard.bodyBox.config(state='disabled')
+        self._indexCard.titleEntry.config(state='normal')
+        self._indexCard.title.set('')
+        self._indexCard.titleEntry.config(state='disabled')
 
     def on_quit(self, event=None):
         self.prefs['tree_width'] = self._treeWindow.sashpos(0)
@@ -156,31 +180,15 @@ class SnapshotView(tk.Toplevel, SubController):
         self.element = self.snapshots[self.nodeId]
         self._set_element_view()
 
-    def _remove_node(self, event=None):
-        try:
-            nodeId = self._treeView.selection()[0]
-        except IndexError:
-            return
-
-        try:
-            if self._ui.ask_yes_no(
-                message=_('Delete the selected snapshot?'),
-                detail=self.snapshots[nodeId].get('title', ''),
-                title=FEATURE,
-                parent=self,
-            ):
-                if self._treeView.prev(nodeId):
-                    self._treeView.selection_set(
-                        self._treeView.prev(nodeId)
-                    )
-        except Error as ex:
-            self._ui.set_status(str(ex))
-
     def _set_element_view(self, event=None):
         # View the selected element's title and description.
+        self._indexCard.bodyBox.config(state='normal')
         self._indexCard.bodyBox.clear()
         self._indexCard.bodyBox.set_text(self.element.get('description', ''))
+        self._indexCard.bodyBox.config(state='disabled')
+        self._indexCard.titleEntry.config(state='normal')
         self._indexCard.title.set(self.element.get('title', ''))
+        self._indexCard.titleEntry.config(state='disabled')
 
     def _set_title(self):
         if self.title:

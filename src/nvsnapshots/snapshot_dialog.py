@@ -14,7 +14,6 @@ from nvsnapshots.platform.platform_settings import KEYS
 
 
 class SnapshotDialog(ModalDialog):
-    """A pop-up window with export preference settings."""
 
     def __init__(self, view, service, **kw):
         super().__init__(view, **kw)
@@ -57,6 +56,8 @@ class SnapshotDialog(ModalDialog):
             text=_('Online help'),
             command=self._open_help
         ).pack(padx=5, pady=5, side='right')
+
+        self.resizable(False, False)
 
         # Set Key bindings.
         self.bind(KEYS.OPEN_HELP[0], self._open_help)

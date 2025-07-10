@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### Version 0.5.0
+
+- Enabled "Remove snapshot".
+
+API: 5.29
+Based on novelibre 5.29.5
+
+
 ### Version 0.4.0
 
 - Snapshot description pop-up working.

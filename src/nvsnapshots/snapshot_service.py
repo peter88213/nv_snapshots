@@ -14,7 +14,6 @@ import sys
 import zipfile
 
 from nvlib.controller.sub_controller import SubController
-from nvlib.novx_globals import Error
 from nvlib.novx_globals import Notification
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_locale import _
@@ -22,6 +21,7 @@ from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.snapshot_dialog import SnapshotDialog
+from nvsnapshots.nvsnapshots_globals import FEATURE
 
 
 class SnapshotService(SubController):
@@ -102,23 +102,16 @@ class SnapshotService(SubController):
                 return
 
         #--- Make sure that a project snapshot subdirectory exists.
-        projectDir, projectFile = os.path.split(self._mdl.prjFile.filePath)
-        snapshotDir = os.path.join(
-            projectDir,
-            self.prefs['snapshot_subdir']
-        )
-        os.makedirs(snapshotDir, exist_ok=True)
+        os.makedirs(self._get_snapshot_dir(), exist_ok=True)
 
         #--- Check whether the snapshot already exists.
+        __, projectFile = os.path.split(self._mdl.prjFile.filePath)
         prjName, __ = os.path.splitext(projectFile)
         prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
         prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
         self._isoDate = prjFileDate.replace(microsecond=0).isoformat()
         self._snapshotId = f"{prjName}.{self._isoDate.replace(':', '.')}"
-        self._zipPath = os.path.join(
-            snapshotDir,
-            f'{self._snapshotId}{self.ZIP_EXTENSION}'
-        )
+        self._zipPath = self._get_zipfile_path(self._snapshotId)
         if os.path.isfile(self._zipPath):
             self._ui.set_status(f'#{_("Snapshot already exists")}.')
             return
@@ -183,6 +176,8 @@ class SnapshotService(SubController):
         event_callbacks = {
             '<<make_snapshot>>': self.make_snapshot,
             '<<open_help>>': self._open_help,
+            '<<remove_snapshot>>': self._remove_snapshot,
+            '<<revert>>': self._revert,
         }
         for sequence, callback in event_callbacks.items():
             self.snapshotView.master.winfo_toplevel().bind(sequence, callback)
@@ -266,11 +261,76 @@ class SnapshotService(SubController):
             )
         except Notification as ex:
             self._ui.set_status(f'#{str(ex)}')
-        except Error as ex:
+        except Exception as ex:
             self._ui.set_status(f'!{str(ex)}')
+
+    def _get_snapshot_dir(self):
+        projectDir, __ = os.path.split(self._mdl.prjFile.filePath)
+        return os.path.join(
+            projectDir,
+            self.prefs.get('snapshot_subdir', ''),
+        )
+
+    def _get_zipfile_path(self, snapshotId):
+        return os.path.join(
+            self._get_snapshot_dir(),
+            f'{snapshotId}{self.ZIP_EXTENSION}'
+        )
 
     def _open_help(self, event=None):
         Nvsnapshotshelp.open_help_page()
+
+    def _remove_snapshot(self, event=None):
+        self._ui.restore_status()
+        snapshotId = self.snapshotView.get_selection()
+        if snapshotId is None:
+            return
+
+        try:
+            if self._ui.ask_yes_no(
+                message=_('Delete the selected snapshot?'),
+                detail=self.prjSnapshots[snapshotId].get('title', ''),
+                title=FEATURE,
+                parent=self.snapshotView,
+            ):
+                os.remove(self._get_zipfile_path(snapshotId))
+        except ValueError as ex:
+            self._ui.set_status(
+                (
+                    f'!{_("Can not remove snapshot")}: '
+                    f'{str(ex)}'
+                )
+            )
+        self.refresh()
+
+    def _revert(self, event=None):
+        self._ui.restore_status()
+        snapshotId = self.snapshotView.get_selection()
+        if snapshotId is None:
+            return
+
+        try:
+            if self._ui.ask_yes_no_cancel(
+                message=_('Make a snapshot before restoring the selected one?'),
+                detail=self.prjSnapshots[snapshotId].get('title', ''),
+                title=_('Revert to the selected snapshot'),
+                parent=self.snapshotView,
+            ):
+                zipFile = self._get_zipfile_path(snapshotId)
+                prjFile = self._mdl.prjFile.filePath
+
+        except Exception as ex:
+            message = (
+                f'!{_("Can not restore snapshot")}: '
+                f'{str(ex)}'
+            )
+        else:
+            message = (
+                f'{_("Snapshot restored")}: '
+                f'"{snapshotId}"'
+            )
+        finally:
+            self._ui.set_status(message)
 
     def _sanitize_filename(self, filename):
         # Return filename with disallowed characters removed.

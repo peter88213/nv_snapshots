@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4.0\n"
-"POT-Creation-Date: 2025-07-10 10:52:02\n"
-"PO-Revision-Date: 2025-07-10 10:52:02\n"
+"Project-Id-Version: 0.5.0\n"
+"POT-Creation-Date: 2025-07-10 21:01:27\n"
+"PO-Revision-Date: 2025-07-10 21:01:27\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,12 @@ msgstr ""
 msgid "Action canceled by user"
 msgstr "Vorgang vom Benutzer abgebrochen"
 
+msgid "Can not remove snapshot"
+msgstr "Kann Schnappschuss nicht entfernen"
+
+msgid "Can not restore snapshot"
+msgstr "Kann Schnappschuss nicht wiederherstellen"
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -24,6 +30,9 @@ msgstr "Schließen"
 
 msgid "Ctrl"
 msgstr "Strg"
+
+msgid "Del"
+msgstr "Entf"
 
 msgid "Delete the selected snapshot?"
 msgstr "Den ausgewählten Schnappschuss löschen?"
@@ -43,6 +52,9 @@ msgstr "Hilfe"
 msgid "Major Character"
 msgstr "Hauptfigur"
 
+msgid "Make a snapshot before restoring the selected one?"
+msgstr "Einen Schnappschuss machen, bevor der ausgewählte wiederhergestellt wird?"
+
 msgid "Minor Character"
 msgstr "Nebenfigur"
 
@@ -51,6 +63,15 @@ msgstr "Ok"
 
 msgid "Online help"
 msgstr "Online-Hilfe"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Revert"
+msgstr "Zurückkehren"
+
+msgid "Revert to the selected snapshot"
+msgstr "Zum ausgewählten Schnappschuss zurückkehren"
 
 msgid "Save"
 msgstr "Speichern"
@@ -72,6 +93,9 @@ msgstr "Schnappschuss fehlgeschlagen"
 
 msgid "Snapshot generated"
 msgstr "Schnappschuss erzeugt"
+
+msgid "Snapshot restored"
+msgstr "Schnappschuss wiederhergestellt"
 
 msgid "Snapshots"
 msgstr "Schnappschüsse"

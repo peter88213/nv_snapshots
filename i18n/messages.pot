@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4.0\n"
-"POT-Creation-Date: 2025-07-10 10:52:02\n"
+"Project-Id-Version: 0.5.0\n"
+"POT-Creation-Date: 2025-07-10 21:01:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -17,6 +17,12 @@ msgstr ""
 msgid "Action canceled by user"
 msgstr ""
 
+msgid "Can not remove snapshot"
+msgstr ""
+
+msgid "Can not restore snapshot"
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -24,6 +30,9 @@ msgid "Close"
 msgstr ""
 
 msgid "Ctrl"
+msgstr ""
+
+msgid "Del"
 msgstr ""
 
 msgid "Delete the selected snapshot?"
@@ -44,6 +53,9 @@ msgstr ""
 msgid "Major Character"
 msgstr ""
 
+msgid "Make a snapshot before restoring the selected one?"
+msgstr ""
+
 msgid "Minor Character"
 msgstr ""
 
@@ -51,6 +63,15 @@ msgid "Ok"
 msgstr ""
 
 msgid "Online help"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Revert"
+msgstr ""
+
+msgid "Revert to the selected snapshot"
 msgstr ""
 
 msgid "Save"
@@ -72,6 +93,9 @@ msgid "Snapshot failed"
 msgstr ""
 
 msgid "Snapshot generated"
+msgstr ""
+
+msgid "Snapshot restored"
 msgstr ""
 
 msgid "Snapshots"
