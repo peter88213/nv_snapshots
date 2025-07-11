@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 0.8.1
+
+- Fixed multiple PLATFORM import issue.
+- Substituting missing snapshot title.
+
+API: 5.29
+Based on novelibre 5.29.6
+
+
 ### Version 0.8.0
 
 - Added columns to the snapshot list.

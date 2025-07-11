@@ -66,8 +66,14 @@ class SnapshotDialog(ModalDialog):
         Nvsnapshotshelp.open_help_page()
 
     def _set_description(self, event=None):
-        self._service.snapshotTitle = self._indexCard.title.get()
-        self._service.snapshotComment = self._indexCard.bodyBox.get_text()
+        snapshotTitle = self._indexCard.title.get()
+        if not snapshotTitle:
+            snapshotTitle = _('Undefined')
+        self._service.snapshotTitle = snapshotTitle
+        snapshotComment = self._indexCard.bodyBox.get_text()
+        if snapshotComment is None:
+            snapshotComment = ''
+        self._service.snapshotComment = snapshotComment
         self.destroy()
         self._ui.root.event_generate('<<save_snapshot>>')
 

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8.0\n"
-"POT-Creation-Date: 2025-07-11 16:41:49\n"
-"PO-Revision-Date: 2025-07-11 16:41:49\n"
+"Project-Id-Version: 0.8.1\n"
+"POT-Creation-Date: 2025-07-11 17:20:10\n"
+"PO-Revision-Date: 2025-07-11 17:20:10\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,18 +21,6 @@ msgstr "2. Überarbeitung"
 
 msgid "Action canceled by user"
 msgstr "Vorgang vom Benutzer abgebrochen"
-
-msgid "Alt-Down"
-msgstr "Alt-Ab"
-
-msgid "Alt-Left"
-msgstr "Alt-Links"
-
-msgid "Alt-Right"
-msgstr "Alt-Rechts"
-
-msgid "Alt-Up"
-msgstr "Alt-Auf"
 
 msgid "Auto-generated snapshot"
 msgstr "Automatisch erzeugter Schnappschuss"
@@ -111,9 +99,6 @@ msgstr "Speichern"
 
 msgid "Save changes?"
 msgstr "Änderungen speichern?"
-
-msgid "Shift"
-msgstr "Umschalt"
 
 msgid "Snapshot"
 msgstr "Schnappschuss"

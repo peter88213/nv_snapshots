@@ -14,10 +14,10 @@ import sys
 import zipfile
 
 from nvlib.controller.sub_controller import SubController
-from nvlib.model.file.doc_open import open_document
 from nvlib.novx_globals import Notification
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_globals import FEATURE
+from nvsnapshots.nvsnapshots_globals import open_document
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.snapshot_dialog import SnapshotDialog

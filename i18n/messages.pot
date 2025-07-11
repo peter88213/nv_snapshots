@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8.0\n"
-"POT-Creation-Date: 2025-07-11 16:41:49\n"
+"Project-Id-Version: 0.8.1\n"
+"POT-Creation-Date: 2025-07-11 17:20:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -21,18 +21,6 @@ msgid "2nd Edit"
 msgstr ""
 
 msgid "Action canceled by user"
-msgstr ""
-
-msgid "Alt-Down"
-msgstr ""
-
-msgid "Alt-Left"
-msgstr ""
-
-msgid "Alt-Right"
-msgstr ""
-
-msgid "Alt-Up"
 msgstr ""
 
 msgid "Auto-generated snapshot"
@@ -111,9 +99,6 @@ msgid "Save"
 msgstr ""
 
 msgid "Save changes?"
-msgstr ""
-
-msgid "Shift"
 msgstr ""
 
 msgid "Snapshot"
