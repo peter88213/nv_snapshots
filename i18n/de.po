@@ -3,15 +3,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.7.0\n"
-"POT-Creation-Date: 2025-07-11 12:55:16\n"
-"PO-Revision-Date: 2025-07-11 12:55:16\n"
+"Project-Id-Version: 0.8.0\n"
+"POT-Creation-Date: 2025-07-11 16:41:49\n"
+"PO-Revision-Date: 2025-07-11 16:41:49\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "1st Edit"
+msgstr "1. Überarbeitung"
+
+msgid "2nd Edit"
+msgstr "2. Überarbeitung"
 
 msgid "Action canceled by user"
 msgstr "Vorgang vom Benutzer abgebrochen"
@@ -49,11 +55,20 @@ msgstr "Schließen"
 msgid "Ctrl"
 msgstr "Strg"
 
+msgid "Date"
+msgstr "Datum"
+
 msgid "Del"
 msgstr "Entf"
 
 msgid "Delete the selected snapshot?"
 msgstr "Den ausgewählten Schnappschuss löschen?"
+
+msgid "Done"
+msgstr "Fertiggestellt"
+
+msgid "Draft"
+msgstr "Entwurf"
 
 msgid "File"
 msgstr "Datei"
@@ -81,6 +96,9 @@ msgstr "Online-Hilfe"
 
 msgid "Open Snapshot folder"
 msgstr "Schnappschussordner öffnen"
+
+msgid "Outline"
+msgstr "Gliederung"
 
 msgid "Remove"
 msgstr "Entfernen"
@@ -120,6 +138,21 @@ msgstr "Schnappschüsse"
 
 msgid "Snapshots plugin Online help"
 msgstr "Schnappschüsse-Plugin Online-Hilfe"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Undefined"
+msgstr "Nicht definiert"
+
+msgid "With unused"
+msgstr "Mit unbenutzten"
+
+msgid "Words"
+msgstr "Wörter"
+
+msgid "Work phase"
+msgstr "Arbeitsphase"
 
 msgid "https://peter88213.github.io/nvhelp-en"
 msgstr "https://peter88213.github.io/nvhelp-de"

@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.7.0\n"
-"POT-Creation-Date: 2025-07-11 12:55:16\n"
+"Project-Id-Version: 0.8.0\n"
+"POT-Creation-Date: 2025-07-11 16:41:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -13,6 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: novxlib pgettext.py 0.3\n"
 
+
+msgid "1st Edit"
+msgstr ""
+
+msgid "2nd Edit"
+msgstr ""
 
 msgid "Action canceled by user"
 msgstr ""
@@ -50,10 +56,19 @@ msgstr ""
 msgid "Ctrl"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
 msgid "Del"
 msgstr ""
 
 msgid "Delete the selected snapshot?"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Draft"
 msgstr ""
 
 msgid "File"
@@ -81,6 +96,9 @@ msgid "Online help"
 msgstr ""
 
 msgid "Open Snapshot folder"
+msgstr ""
+
+msgid "Outline"
 msgstr ""
 
 msgid "Remove"
@@ -120,6 +138,21 @@ msgid "Snapshots"
 msgstr ""
 
 msgid "Snapshots plugin Online help"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Undefined"
+msgstr ""
+
+msgid "With unused"
+msgstr ""
+
+msgid "Words"
+msgstr ""
+
+msgid "Work phase"
 msgstr ""
 
 msgid "https://peter88213.github.io/nvhelp-en"

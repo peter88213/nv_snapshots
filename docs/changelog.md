@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 0.8.0
+
+- Added columns to the snapshot list.
+
+API: 5.29
+Based on novelibre 5.29.6
+
+
 ### Version 0.7.0
 
 - "Revert" feature implemented.

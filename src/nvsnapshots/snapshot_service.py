@@ -14,24 +14,30 @@ import sys
 import zipfile
 
 from nvlib.controller.sub_controller import SubController
+from nvlib.model.file.doc_open import open_document
 from nvlib.novx_globals import Notification
 from nvlib.novx_globals import norm_path
+from nvsnapshots.nvsnapshots_globals import FEATURE
+from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
+from nvsnapshots.snapshot_dialog import SnapshotDialog
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
-from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
-from nvsnapshots.snapshot_dialog import SnapshotDialog
-from nvsnapshots.nvsnapshots_globals import FEATURE
-from nvlib.model.file.doc_open import open_document
 
 
 class SnapshotService(SubController):
     INI_FILENAME = 'snapshots.ini'
     INI_FILEPATH = '.novx/config'
     SETTINGS = dict(
-        window_geometry='600x300',
-        right_frame_width=350,
         snapshot_subdir='Snapshots',
+        window_geometry='1270x250',
+        right_frame_width=350,
+        id_width=160,
+        title_width=240,
+        date_width=120,
+        words_used_width=55,
+        words_total_width=100,
+        work_phase_width=140,
     )
     OPTIONS = {}
     ICON = 'snapshot'
