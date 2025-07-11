@@ -38,17 +38,18 @@ class SnapshotView(tk.Toplevel, SubController):
 
         #--- Main window.
         self._mainWindow = ttk.Frame(self)
-        self._mainWindow.pack(fill='both', padx=2, pady=2, expand=True)
-
-        #--- Paned window displaying the tree and an "index card".
-        self._treeWindow = ttk.Panedwindow(
-            self._mainWindow,
-            orient='horizontal',
+        self._mainWindow.pack(
+            fill='both',
+            padx=2,
+            pady=2,
+            expand=True,
         )
-        self._treeWindow.pack(fill='both', expand=True)
 
         #--- Tree for snapshot selection.
-        self._treeView = ttk.Treeview(self._treeWindow, selectmode='browse')
+        self._treeView = ttk.Treeview(
+            self._mainWindow,
+            selectmode='browse',
+        )
         scrollY = ttk.Scrollbar(
             self._treeView,
             orient='vertical',
@@ -56,18 +57,26 @@ class SnapshotView(tk.Toplevel, SubController):
         )
         self._treeView.configure(yscrollcommand=scrollY.set)
         scrollY.pack(side='right', fill='y')
-        self._treeView.pack(side='left')
-        self._treeWindow.add(self._treeView)
+        self._treeView.pack(
+            side='left',
+            expand=True,
+            fill='both',
+        )
         self._treeView.bind('<<TreeviewSelect>>', self._on_select_node)
 
         #--- "Index card" in the right frame.
-        self._indexCard = IndexCard(self._treeWindow, bd=2, relief='ridge')
-        self._indexCard.pack(side='right')
-        self._treeWindow.add(self._indexCard)
-
-        # Adjust the tree width.
-        self._treeWindow.update()
-        self._treeWindow.sashpos(0, self.prefs['tree_width'])
+        self._indexCard = IndexCard(
+            self._mainWindow,
+            bd=2,
+            relief='ridge',
+            width=prefs['right_frame_width'],
+        )
+        self._indexCard.pack(
+            side='right',
+            expand=False,
+            fill='both',
+        )
+        self._indexCard.pack_propagate(0)
 
         #--- Add menu entries.
         # File menu.
@@ -164,7 +173,6 @@ class SnapshotView(tk.Toplevel, SubController):
 
     def on_quit(self, event=None):
         self.update_idletasks()
-        self.prefs['tree_width'] = self._treeWindow.sashpos(0)
         self.prefs['window_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False

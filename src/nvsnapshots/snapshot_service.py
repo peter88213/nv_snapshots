@@ -29,8 +29,8 @@ class SnapshotService(SubController):
     INI_FILENAME = 'snapshots.ini'
     INI_FILEPATH = '.novx/config'
     SETTINGS = dict(
-        tree_width='260',
         window_geometry='600x300',
+        right_frame_width=350,
         snapshot_subdir='Snapshots',
     )
     OPTIONS = {}
