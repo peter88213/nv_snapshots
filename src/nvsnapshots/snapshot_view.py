@@ -129,6 +129,12 @@ class SnapshotView(tk.Toplevel, SubController):
         self.isOpen = True
         self.element = {}
 
+    def disable_menu(self):
+        self._mainMenu.entryconfig(_('File'), state='disabled')
+
+    def enable_menu(self):
+        self._mainMenu.entryconfig(_('File'), state='normal')
+
     def get_selection(self):
         try:
             nodeId = self._treeView.selection()[0]
@@ -189,11 +195,4 @@ class SnapshotView(tk.Toplevel, SubController):
         self._indexCard.titleEntry.config(state='normal')
         self._indexCard.title.set(self.element.get('title', ''))
         self._indexCard.titleEntry.config(state='disabled')
-
-    def _set_title(self):
-        if self.title:
-            collectionTitle = self.title
-        else:
-            collectionTitle = _('Untitled collection')
-        self.title(f'{collectionTitle} - {FEATURE}')
 

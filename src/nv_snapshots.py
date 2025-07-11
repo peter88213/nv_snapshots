@@ -42,6 +42,7 @@ class Plugin(PluginBase):
         """
         self._ui.fileMenu.entryconfig(_('Snapshot'), state='disabled')
         self._ui.toolsMenu.entryconfig(FEATURE, state='disabled')
+        self.snapshotService.disable_menu()
 
     def enable_menu(self):
         """Enable menu entries when a project is open.
@@ -50,6 +51,7 @@ class Plugin(PluginBase):
         """
         self._ui.fileMenu.entryconfig(_('Snapshot'), state='normal')
         self._ui.toolsMenu.entryconfig(FEATURE, state='normal')
+        self.snapshotService.enable_menu()
 
     def install(self, model, view, controller):
         """Add a submenu to the 'File' menu.

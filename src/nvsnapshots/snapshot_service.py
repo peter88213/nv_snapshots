@@ -385,3 +385,9 @@ class SnapshotService(SubController):
         self._ui.set_status(message)
         self.refresh()
 
+    def disable_menu(self):
+        self.snapshotView.disable_menu()
+
+    def enable_menu(self):
+        self.snapshotView.enable_menu()
+
