@@ -79,6 +79,11 @@ class SnapshotView(tk.Toplevel, SubController):
             menu=self._fileMenu,
         )
         self._fileMenu.add_command(
+            label=_('Open Snapshot folder'),
+            command=self._event('<<open_folder>>'),
+        )
+        self._fileMenu.add_separator()
+        self._fileMenu.add_command(
             label=_('Snapshot'),
             accelerator=KEYS.MAKE_SNAPSHOT[1],
             image=icons.get('snapshot', None),

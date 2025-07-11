@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.5.0\n"
-"POT-Creation-Date: 2025-07-10 21:01:27\n"
-"PO-Revision-Date: 2025-07-10 21:01:27\n"
+"Project-Id-Version: 0.6.0\n"
+"POT-Creation-Date: 2025-07-11 10:13:14\n"
+"PO-Revision-Date: 2025-07-11 10:13:14\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,18 @@ msgstr ""
 
 msgid "Action canceled by user"
 msgstr "Vorgang vom Benutzer abgebrochen"
+
+msgid "Alt-Down"
+msgstr "Alt-Ab"
+
+msgid "Alt-Left"
+msgstr "Alt-Links"
+
+msgid "Alt-Right"
+msgstr "Alt-Rechts"
+
+msgid "Alt-Up"
+msgstr "Alt-Auf"
 
 msgid "Can not remove snapshot"
 msgstr "Kann Schnappschuss nicht entfernen"
@@ -64,6 +76,9 @@ msgstr "Ok"
 msgid "Online help"
 msgstr "Online-Hilfe"
 
+msgid "Open Snapshot folder"
+msgstr "Schnappschussordner öffnen"
+
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -78,6 +93,9 @@ msgstr "Speichern"
 
 msgid "Save changes?"
 msgstr "Änderungen speichern?"
+
+msgid "Shift"
+msgstr "Umschalt"
 
 msgid "Snapshot"
 msgstr "Schnappschuss"
@@ -102,9 +120,6 @@ msgstr "Schnappschüsse"
 
 msgid "Snapshots plugin Online help"
 msgstr "Schnappschüsse-Plugin Online-Hilfe"
-
-msgid "Untitled collection"
-msgstr "Unbenannte Sammlung"
 
 msgid "https://peter88213.github.io/nvhelp-en"
 msgstr "https://peter88213.github.io/nvhelp-de"

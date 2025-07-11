@@ -4,6 +4,15 @@
 
 ## Changelog
 
+### Version 0.6.0
+
+- New feature: "Open Snapshot folder". 
+- Enabling/disabling menus.  
+
+API: 5.29
+Based on novelibre 5.29.5
+
+
 ### Version 0.5.0
 
 - Enabled "Remove snapshot".

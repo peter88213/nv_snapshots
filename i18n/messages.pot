@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.5.0\n"
-"POT-Creation-Date: 2025-07-10 21:01:27\n"
+"Project-Id-Version: 0.6.0\n"
+"POT-Creation-Date: 2025-07-11 10:13:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -15,6 +15,18 @@ msgstr ""
 
 
 msgid "Action canceled by user"
+msgstr ""
+
+msgid "Alt-Down"
+msgstr ""
+
+msgid "Alt-Left"
+msgstr ""
+
+msgid "Alt-Right"
+msgstr ""
+
+msgid "Alt-Up"
 msgstr ""
 
 msgid "Can not remove snapshot"
@@ -65,6 +77,9 @@ msgstr ""
 msgid "Online help"
 msgstr ""
 
+msgid "Open Snapshot folder"
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
@@ -78,6 +93,9 @@ msgid "Save"
 msgstr ""
 
 msgid "Save changes?"
+msgstr ""
+
+msgid "Shift"
 msgstr ""
 
 msgid "Snapshot"
@@ -102,9 +120,6 @@ msgid "Snapshots"
 msgstr ""
 
 msgid "Snapshots plugin Online help"
-msgstr ""
-
-msgid "Untitled collection"
 msgstr ""
 
 msgid "https://peter88213.github.io/nvhelp-en"

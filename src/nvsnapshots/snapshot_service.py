@@ -22,6 +22,7 @@ import tkinter as tk
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.snapshot_dialog import SnapshotDialog
 from nvsnapshots.nvsnapshots_globals import FEATURE
+from nvlib.model.file.doc_open import open_document
 
 
 class SnapshotService(SubController):
@@ -80,6 +81,12 @@ class SnapshotService(SubController):
         self._ui.root.bind('<<save_snapshot>>', self._save_snapshot)
         self.snapshotTitle = None
         self.snapshotComment = None
+
+    def disable_menu(self):
+        self.snapshotView.disable_menu()
+
+    def enable_menu(self):
+        self.snapshotView.enable_menu()
 
     def make_snapshot(self, event=None):
         self._ui.restore_status()
@@ -178,6 +185,7 @@ class SnapshotService(SubController):
             '<<open_help>>': self._open_help,
             '<<remove_snapshot>>': self._remove_snapshot,
             '<<revert>>': self._revert,
+            '<<open_folder>>': self._open_folder,
         }
         for sequence, callback in event_callbacks.items():
             self.snapshotView.master.winfo_toplevel().bind(sequence, callback)
@@ -276,6 +284,12 @@ class SnapshotService(SubController):
             self._get_snapshot_dir(),
             f'{snapshotId}{self.ZIP_EXTENSION}'
         )
+
+    def _open_folder(self, event=None):
+        # Open the snapshot folder with the OS file manager.
+        snapshotDir = self._get_snapshot_dir()
+        os.makedirs(snapshotDir, exist_ok=True)
+        open_document(snapshotDir)
 
     def _open_help(self, event=None):
         Nvsnapshotshelp.open_help_page()
@@ -384,10 +398,4 @@ class SnapshotService(SubController):
             message = f'{_("Snapshot generated")} ({self._isoDate})'
         self._ui.set_status(message)
         self.refresh()
-
-    def disable_menu(self):
-        self.snapshotView.disable_menu()
-
-    def enable_menu(self):
-        self.snapshotView.enable_menu()
 
