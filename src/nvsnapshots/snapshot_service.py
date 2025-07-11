@@ -29,9 +29,8 @@ class SnapshotService(SubController):
     INI_FILENAME = 'snapshots.ini'
     INI_FILEPATH = '.novx/config'
     SETTINGS = dict(
-        last_open='',
         tree_width='260',
-        window_size='600x300',
+        window_geometry='600x300',
         snapshot_subdir='Snapshots',
     )
     OPTIONS = {}
@@ -56,7 +55,7 @@ class SnapshotService(SubController):
             settings=self.SETTINGS,
             options=self.OPTIONS
         )
-        # self.configuration.read(self.iniFile)
+        self.configuration.read(self.iniFile)
         self.prefs = {}
         self.prefs.update(self.configuration.settings)
         self.prefs.update(self.configuration.options)
@@ -140,7 +139,7 @@ class SnapshotService(SubController):
                 self.configuration.options[keyword] = self.prefs[keyword]
             elif keyword in self.configuration.settings:
                 self.configuration.settings[keyword] = self.prefs[keyword]
-        # self.configuration.write(self.iniFile)
+        self.configuration.write(self.iniFile)
 
     def refresh(self):
         self._collect_snapshots()
@@ -158,14 +157,10 @@ class SnapshotService(SubController):
                 self.snapshotView.focus()
                 return
 
-        __, x, y = self._ui.root.geometry().split('+')
-        offset = 100
-        windowPosition = f'+{int(x)+offset}+{int(y)+offset}'
         self.snapshotView = SnapshotView(
             self._mdl,
             self._ui,
             self._ctrl,
-            windowPosition,
             self.prefs,
         )
         if self.icon:

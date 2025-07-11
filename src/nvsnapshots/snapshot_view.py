@@ -17,16 +17,14 @@ from nvsnapshots.nvsnapshots_globals import icons
 
 
 class SnapshotView(tk.Toplevel, SubController):
-    HEIGHT_BIAS = 20
 
-    def __init__(self, model, view, controller, windowPosition, prefs):
+    def __init__(self, model, view, controller, prefs):
         super().__init__()
         self._mdl = model
         self._ui = view
         self._ctrl = controller
         self.prefs = prefs
-        windowSize = self.prefs['window_size'].split('+')[0]
-        self.geometry(f"{windowSize}{windowPosition}")
+        self.geometry(f"{self.prefs['window_geometry']}")
 
         self.title(FEATURE)
         self.statusText = ''
@@ -127,10 +125,6 @@ class SnapshotView(tk.Toplevel, SubController):
         self.bind(KEYS.OPEN_HELP[0], self._event('<<open_help>>'))
         self.bind(KEYS.DELETE[0], self._event('<<remove_snapshot>>'))
 
-        # Restore last window size.
-        self.update_idletasks()
-        self.geometry(f"{windowSize}{windowPosition}")
-
         self.isOpen = True
         self.element = {}
 
@@ -169,8 +163,9 @@ class SnapshotView(tk.Toplevel, SubController):
         self._indexCard.titleEntry.config(state='disabled')
 
     def on_quit(self, event=None):
+        self.update_idletasks()
         self.prefs['tree_width'] = self._treeWindow.sashpos(0)
-        self.prefs['window_size'] = self.winfo_geometry().split('+')[0]
+        self.prefs['window_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 
