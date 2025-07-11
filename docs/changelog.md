@@ -4,6 +4,17 @@
 
 ## Changelog
 
+
+### Version 0.7.0
+
+- "Revert" feature implemented.
+- Fixed configuration read/write.
+- Made the index card width fixed.
+
+API: 5.29
+Based on novelibre 5.29.5
+
+
 ### Version 0.6.0
 
 - New feature: "Open Snapshot folder". 
