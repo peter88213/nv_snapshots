@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
-"POT-Creation-Date: 2025-07-11 10:13:14\n"
-"PO-Revision-Date: 2025-07-11 10:13:14\n"
+"POT-Creation-Date: 2025-07-11 11:37:19\n"
+"PO-Revision-Date: 2025-07-11 11:37:19\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,12 @@ msgstr "Alt-Rechts"
 
 msgid "Alt-Up"
 msgstr "Alt-Auf"
+
+msgid "Auto-generated snapshot"
+msgstr "Automatisch erzeugter Schnappschuss"
+
+msgid "Before reverting to {} \n\"{}\""
+msgstr "Vor der Rückkehr zu {} \n\"{}\""
 
 msgid "Can not remove snapshot"
 msgstr "Kann Schnappschuss nicht entfernen"
@@ -64,9 +70,6 @@ msgstr "Hilfe"
 msgid "Major Character"
 msgstr "Hauptfigur"
 
-msgid "Make a snapshot before restoring the selected one?"
-msgstr "Einen Schnappschuss machen, bevor der ausgewählte wiederhergestellt wird?"
-
 msgid "Minor Character"
 msgstr "Nebenfigur"
 
@@ -84,9 +87,6 @@ msgstr "Entfernen"
 
 msgid "Revert"
 msgstr "Zurückkehren"
-
-msgid "Revert to the selected snapshot"
-msgstr "Zum ausgewählten Schnappschuss zurückkehren"
 
 msgid "Save"
 msgstr "Speichern"

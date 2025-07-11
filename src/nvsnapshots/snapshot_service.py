@@ -75,7 +75,8 @@ class SnapshotService(SubController):
 
         self._snapshotId = None
         self._isoDate = None
-        self._projectFile = None
+        self._prjFile = None
+        self._prjDir = None
         self._zipPath = None
 
         self._ui.root.bind('<<save_snapshot>>', self._save_snapshot)
@@ -88,7 +89,7 @@ class SnapshotService(SubController):
     def enable_menu(self):
         self.snapshotView.enable_menu()
 
-    def make_snapshot(self, event=None):
+    def make_snapshot(self, doNotAsk=False, event=None):
         self._ui.restore_status()
         self._ui.propertiesView.apply_changes()
         if self._mdl.prjFile is None:
@@ -99,7 +100,7 @@ class SnapshotService(SubController):
                 return
 
         if self._mdl.isModified:
-            if self._ui.ask_yes_no(
+            if doNotAsk or self._ui.ask_yes_no(
                 message=_('Save changes?')
             ):
                 self._ctrl.save_project()
@@ -112,13 +113,7 @@ class SnapshotService(SubController):
         os.makedirs(self._get_snapshot_dir(), exist_ok=True)
 
         #--- Check whether the snapshot already exists.
-        __, projectFile = os.path.split(self._mdl.prjFile.filePath)
-        prjName, __ = os.path.splitext(projectFile)
-        prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
-        prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
-        self._isoDate = prjFileDate.replace(microsecond=0).isoformat()
-        self._snapshotId = f"{prjName}.{self._isoDate.replace(':', '.')}"
-        self._zipPath = self._get_zipfile_path(self._snapshotId)
+        self._initialize_snapshot()
         if os.path.isfile(self._zipPath):
             self._ui.set_status(f'#{_("Snapshot already exists")}.')
             return
@@ -285,6 +280,16 @@ class SnapshotService(SubController):
             f'{snapshotId}{self.ZIP_EXTENSION}'
         )
 
+    def _initialize_snapshot(self):
+        # Set iso date, ID, and path for the next snapshot.
+        self._prjDir, self._prjFile = os.path.split(self._mdl.prjFile.filePath)
+        prjName, __ = os.path.splitext(self._prjFile)
+        prjFileTimestamp = os.path.getmtime(self._mdl.prjFile.filePath)
+        prjFileDate = (datetime.fromtimestamp(prjFileTimestamp))
+        self._isoDate = prjFileDate.replace(microsecond=0).isoformat()
+        self._snapshotId = f"{prjName}.{self._isoDate.replace(':', '.')}"
+        self._zipPath = self._get_zipfile_path(self._snapshotId)
+
     def _open_folder(self, event=None):
         # Open the snapshot folder with the OS file manager.
         snapshotDir = self._get_snapshot_dir()
@@ -319,20 +324,36 @@ class SnapshotService(SubController):
 
     def _revert(self, event=None):
         self._ui.restore_status()
-        snapshotId = self.snapshotView.get_selection()
-        if snapshotId is None:
+        snapshotIdToRestore = self.snapshotView.get_selection()
+        if snapshotIdToRestore is None:
             return
 
+        #--- Check whether an up-to-date snapshot already exists.
+        self._initialize_snapshot()
+        if (
+            not os.path.isfile(self._zipPath)
+            or self._mdl.isModified
+        ):
+            if self._mdl.isModified:
+                self._ctrl.save_project()
+                self._initialize_snapshot()
+            self.snapshotTitle = _('Auto-generated snapshot')
+            self.snapshotComment = _('Before reverting to {} \n"{}"').format(
+                    snapshotIdToRestore,
+                    self.prjSnapshots[snapshotIdToRestore]['title']
+                )
+            self._save_snapshot()
+        zipFileToRestore = self._get_zipfile_path(snapshotIdToRestore)
         try:
-            if self._ui.ask_yes_no_cancel(
-                message=_('Make a snapshot before restoring the selected one?'),
-                detail=self.prjSnapshots[snapshotId].get('title', ''),
-                title=_('Revert to the selected snapshot'),
-                parent=self.snapshotView,
-            ):
-                zipFile = self._get_zipfile_path(snapshotId)
-                prjFile = self._mdl.prjFile.filePath
-
+            with zipfile.ZipFile(zipFileToRestore, 'r') as z:
+                z.extract(
+                    self._prjFile,
+                    path=self._prjDir,
+                )
+            self._ctrl.open_project(
+                filePath=self._mdl.prjFile.filePath,
+                doNotSave=True,
+            )
         except Exception as ex:
             message = (
                 f'!{_("Can not restore snapshot")}: '
@@ -341,7 +362,7 @@ class SnapshotService(SubController):
         else:
             message = (
                 f'{_("Snapshot restored")}: '
-                f'"{snapshotId}"'
+                f'"{snapshotIdToRestore}"'
             )
         finally:
             self._ui.set_status(message)
@@ -371,7 +392,7 @@ class SnapshotService(SubController):
                 # Write project file.
                 z.write(
                     self._mdl.prjFile.filePath,
-                    arcname=self._projectFile,
+                    arcname=self._prjFile,
                     compress_type=zipfile.ZIP_DEFLATED,
                 )
 

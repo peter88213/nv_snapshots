@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
-"POT-Creation-Date: 2025-07-11 10:13:14\n"
+"POT-Creation-Date: 2025-07-11 11:37:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -27,6 +27,12 @@ msgid "Alt-Right"
 msgstr ""
 
 msgid "Alt-Up"
+msgstr ""
+
+msgid "Auto-generated snapshot"
+msgstr ""
+
+msgid "Before reverting to {} \n\"{}\""
 msgstr ""
 
 msgid "Can not remove snapshot"
@@ -65,9 +71,6 @@ msgstr ""
 msgid "Major Character"
 msgstr ""
 
-msgid "Make a snapshot before restoring the selected one?"
-msgstr ""
-
 msgid "Minor Character"
 msgstr ""
 
@@ -84,9 +87,6 @@ msgid "Remove"
 msgstr ""
 
 msgid "Revert"
-msgstr ""
-
-msgid "Revert to the selected snapshot"
 msgstr ""
 
 msgid "Save"
