@@ -14,9 +14,18 @@ import sys
 import zipfile
 
 from nvlib.controller.sub_controller import SubController
+from nvlib.novx_globals import CHAPTERS_SUFFIX
+from nvlib.novx_globals import CHARACTERS_SUFFIX
+from nvlib.novx_globals import DATA_SUFFIX
 from nvlib.novx_globals import GRID_SUFFIX
+from nvlib.novx_globals import ITEMS_SUFFIX
+from nvlib.novx_globals import LOCATIONS_SUFFIX
 from nvlib.novx_globals import MANUSCRIPT_SUFFIX
 from nvlib.novx_globals import Notification
+from nvlib.novx_globals import PARTS_SUFFIX
+from nvlib.novx_globals import PLOTLINES_SUFFIX
+from nvlib.novx_globals import SECTIONS_SUFFIX
+from nvlib.novx_globals import STAGES_SUFFIX
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_globals import open_document
@@ -180,8 +189,17 @@ class SnapshotService(SubController):
     def _bind_events(self):
         event_callbacks = {
             '<<clean_up>>': self._clean_up_snapshot_dir,
+            '<<export_characters>>': self._export_characters,
+            '<<export_chapters>>': self._export_chapters,
+            '<<export_data>>': self._export_data,
             '<<export_grid>>': self._export_grid,
+            '<<export_items>>': self._export_items,
+            '<<export_locations>>': self._export_locations,
             '<<export_manuscript>>': self._export_manuscript,
+            '<<export_sections>>': self._export_sections,
+            '<<export_stages>>': self._export_stages,
+            '<<export_parts>>': self._export_parts,
+            '<<export_plotlines>>': self._export_plotlines,
             '<<make_snapshot>>': self.make_snapshot,
             '<<open_help>>': self._open_help,
             '<<remove_snapshot>>': self._remove_snapshot,
@@ -200,6 +218,7 @@ class SnapshotService(SubController):
         for pattern in (
             '*.bak',
             '*.od?',
+            '*.xml',
         ):
             for file in glob.iglob(
                 pattern,
@@ -289,7 +308,7 @@ class SnapshotService(SubController):
         except Exception as ex:
             self._ui.set_status(f'!{str(ex)}')
 
-    def _export_document(self, suffix, event=None):
+    def _export_document(self, suffix, show=True, event=None):
         self._ui.restore_status()
         snapshotId = self.snapshotView.get_selection()
         if snapshotId is None:
@@ -300,13 +319,41 @@ class SnapshotService(SubController):
             suffix,
             overwrite=True,
             ask=True,
+            show=show,
         )
+
+    def _export_characters(self, event=None):
+        self._export_document(CHARACTERS_SUFFIX, event=event)
+
+    def _export_chapters(self, event=None):
+        self._export_document(CHAPTERS_SUFFIX, event=event)
+
+    def _export_data(self, event=None):
+        self._export_document(DATA_SUFFIX, show=False, event=event)
+
+    def _export_grid(self, event=None):
+        self._export_document(GRID_SUFFIX, event=event)
+
+    def _export_items(self, event=None):
+        self._export_document(ITEMS_SUFFIX, event=event)
+
+    def _export_locations(self, event=None):
+        self._export_document(LOCATIONS_SUFFIX, event=event)
 
     def _export_manuscript(self, event=None):
         self._export_document(MANUSCRIPT_SUFFIX, event=event)
 
-    def _export_grid(self, event=None):
-        self._export_document(GRID_SUFFIX, event=event)
+    def _export_parts(self, event=None):
+        self._export_document(PARTS_SUFFIX, event=event)
+
+    def _export_plotlines(self, event=None):
+        self._export_document(PLOTLINES_SUFFIX, event=event)
+
+    def _export_sections(self, event=None):
+        self._export_document(SECTIONS_SUFFIX, event=event)
+
+    def _export_stages(self, event=None):
+        self._export_document(STAGES_SUFFIX, event=event)
 
     def _get_snapshot_dir(self):
         projectDir, __ = os.path.split(self._mdl.prjFile.filePath)

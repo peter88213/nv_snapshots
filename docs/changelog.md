@@ -5,6 +5,17 @@
 ## Changelog
 
 
+### Version 1.0.0
+
+Feature complete.
+
+- Added and bound missing export methods.
+- Enabling/disabling the "Export" menu.
+
+API: 5.29
+Based on novelibre 5.29.7
+
+
 ### Version 0.9.0
 
 - Exporting manuscript and plot grid.

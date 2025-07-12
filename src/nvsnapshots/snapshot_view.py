@@ -43,11 +43,11 @@ class SnapshotView(tk.Toplevel, SubController):
         self.lift()
         self.focus()
 
-        #--- Main menu.
+        # Main menu.
         self._mainMenu = tk.Menu(self)
         self.config(menu=self._mainMenu)
 
-        #--- Main window.
+        # Main window.
         self._mainWindow = ttk.Frame(self)
         self._mainWindow.pack(
             fill='both',
@@ -56,7 +56,7 @@ class SnapshotView(tk.Toplevel, SubController):
             expand=True,
         )
 
-        #--- Tree for snapshot selection.
+        # Tree for snapshot selection.
         self._treeView = ttk.Treeview(
             self._mainWindow,
             columns=tuple(self._COLUMNS),
@@ -88,7 +88,7 @@ class SnapshotView(tk.Toplevel, SubController):
                 anchor='w',
             )
 
-        #--- "Index card" in the right frame.
+        # "Index card" in the right frame.
         self._indexCard = IndexCard(
             self._mainWindow,
             bd=2,
@@ -102,7 +102,6 @@ class SnapshotView(tk.Toplevel, SubController):
         )
         self._indexCard.pack_propagate(0)
 
-        #--- Add menu entries.
         # File menu.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(
@@ -155,24 +154,24 @@ class SnapshotView(tk.Toplevel, SubController):
         self._exportMenu.add_separator()
         self._exportMenu.add_command(
             label=_('Part descriptions'),
-            command=self._event('<<export_part_desc>>'),
+            command=self._event('<<export_parts>>'),
         )
         self._exportMenu.add_command(
             label=_('Chapter descriptions'),
-            command=self._event('<<export_chapter_desc>>'),
+            command=self._event('<<export_chapters>>'),
         )
         self._exportMenu.add_command(
             label=_('Section descriptions'),
-            command=self._event('<<export_section_desc>>'),
+            command=self._event('<<export_sections>>'),
         )
         self._exportMenu.add_separator()
         self._exportMenu.add_command(
             label=_('Story structure'),
-            command=self._event('<<export_story_struct_desc>>'),
+            command=self._event('<<export_stages>>'),
         )
         self._exportMenu.add_command(
             label=_('Plot line descriptions'),
-            command=self._event('<<export_plotline_desc>>'),
+            command=self._event('<<export_plotlines>>'),
         )
         self._exportMenu.add_command(
             label=_('Plot grid'),
@@ -181,20 +180,20 @@ class SnapshotView(tk.Toplevel, SubController):
         self._exportMenu.add_separator()
         self._exportMenu.add_command(
             label=_('Character descriptions'),
-            command=self._event('<<export_character_desc>>'),
+            command=self._event('<<export_characters>>'),
         )
         self._exportMenu.add_command(
             label=_('Location descriptions'),
-            command=self._event('<<export_location_desc>>'),
+            command=self._event('<<export_locations>>'),
         )
         self._exportMenu.add_command(
             label=_('Item descriptions'),
-            command=self._event('<<export_item_desc>>'),
+            command=self._event('<<export_items>>'),
         )
         self._exportMenu.add_separator()
         self._exportMenu.add_command(
             label=_('XML data files'),
-            command=self._event('<<export_xml_data>>'),
+            command=self._event('<<export_data>>'),
         )
 
         # Help menu.
@@ -209,7 +208,7 @@ class SnapshotView(tk.Toplevel, SubController):
             command=self._event('<<open_help>>'),
         )
 
-        #--- Event bindings.
+        # Event bindings.
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
         if PLATFORM != 'win':
             self.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
@@ -222,9 +221,11 @@ class SnapshotView(tk.Toplevel, SubController):
 
     def disable_menu(self):
         self._mainMenu.entryconfig(_('File'), state='disabled')
+        self._mainMenu.entryconfig(_('Export'), state='disabled')
 
     def enable_menu(self):
         self._mainMenu.entryconfig(_('File'), state='normal')
+        self._mainMenu.entryconfig(_('Export'), state='normal')
 
     def get_selection(self):
         try:
