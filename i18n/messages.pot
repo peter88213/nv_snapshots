@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.0\n"
-"POT-Creation-Date: 2025-07-12 07:17:31\n"
+"POT-Creation-Date: 2025-07-12 14:41:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -36,6 +36,12 @@ msgid "Can not restore snapshot"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+msgid "Chapter descriptions"
+msgstr ""
+
+msgid "Character descriptions"
 msgstr ""
 
 msgid "Clean up Snapshot folder"
@@ -77,6 +83,12 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
+msgid "Item descriptions"
+msgstr ""
+
+msgid "Location descriptions"
+msgstr ""
+
 msgid "Major Character"
 msgstr ""
 
@@ -98,7 +110,13 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
+msgid "Part descriptions"
+msgstr ""
+
 msgid "Plot grid"
+msgstr ""
+
+msgid "Plot line descriptions"
 msgstr ""
 
 msgid "Remove"
@@ -111,6 +129,9 @@ msgid "Save"
 msgstr ""
 
 msgid "Save changes?"
+msgstr ""
+
+msgid "Section descriptions"
 msgstr ""
 
 msgid "Snapshot"
@@ -137,6 +158,9 @@ msgstr ""
 msgid "Snapshots plugin Online help"
 msgstr ""
 
+msgid "Story structure"
+msgstr ""
+
 msgid "Title"
 msgstr ""
 
@@ -150,6 +174,9 @@ msgid "Words"
 msgstr ""
 
 msgid "Work phase"
+msgstr ""
+
+msgid "XML data files"
 msgstr ""
 
 msgid "https://peter88213.github.io/nvhelp-en"

@@ -152,9 +152,49 @@ class SnapshotView(tk.Toplevel, SubController):
             label=_('Manuscript'),
             command=self._event('<<export_manuscript>>'),
         )
+        self._exportMenu.add_separator()
+        self._exportMenu.add_command(
+            label=_('Part descriptions'),
+            command=self._event('<<export_part_desc>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Chapter descriptions'),
+            command=self._event('<<export_chapter_desc>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Section descriptions'),
+            command=self._event('<<export_section_desc>>'),
+        )
+        self._exportMenu.add_separator()
+        self._exportMenu.add_command(
+            label=_('Story structure'),
+            command=self._event('<<export_story_struct_desc>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Plot line descriptions'),
+            command=self._event('<<export_plotline_desc>>'),
+        )
         self._exportMenu.add_command(
             label=_('Plot grid'),
             command=self._event('<<export_grid>>'),
+        )
+        self._exportMenu.add_separator()
+        self._exportMenu.add_command(
+            label=_('Character descriptions'),
+            command=self._event('<<export_character_desc>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Location descriptions'),
+            command=self._event('<<export_location_desc>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Item descriptions'),
+            command=self._event('<<export_item_desc>>'),
+        )
+        self._exportMenu.add_separator()
+        self._exportMenu.add_command(
+            label=_('XML data files'),
+            command=self._event('<<export_xml_data>>'),
         )
 
         # Help menu.
