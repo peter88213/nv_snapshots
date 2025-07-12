@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8.1\n"
-"POT-Creation-Date: 2025-07-11 17:20:10\n"
-"PO-Revision-Date: 2025-07-11 17:20:10\n"
+"Project-Id-Version: 0.9.0\n"
+"POT-Creation-Date: 2025-07-12 07:17:31\n"
+"PO-Revision-Date: 2025-07-12 07:17:31\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,9 @@ msgstr "Kann Schnappschuss nicht wiederherstellen"
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Clean up Snapshot folder"
+msgstr "Schnappschuss-Ordner aufräumen"
+
 msgid "Close"
 msgstr "Schließen"
 
@@ -58,6 +61,9 @@ msgstr "Fertiggestellt"
 msgid "Draft"
 msgstr "Entwurf"
 
+msgid "Export"
+msgstr "Exportieren"
+
 msgid "File"
 msgstr "Datei"
 
@@ -73,6 +79,9 @@ msgstr "Hilfe"
 msgid "Major Character"
 msgstr "Hauptfigur"
 
+msgid "Manuscript"
+msgstr "Manuskript"
+
 msgid "Minor Character"
 msgstr "Nebenfigur"
 
@@ -83,10 +92,13 @@ msgid "Online help"
 msgstr "Online-Hilfe"
 
 msgid "Open Snapshot folder"
-msgstr "Schnappschussordner öffnen"
+msgstr "Schnappschuss-Ordner öffnen"
 
 msgid "Outline"
 msgstr "Gliederung"
+
+msgid "Plot grid"
+msgstr "Handlungsraster (Plot grid)"
 
 msgid "Remove"
 msgstr "Entfernen"

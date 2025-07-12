@@ -113,6 +113,10 @@ class SnapshotView(tk.Toplevel, SubController):
             label=_('Open Snapshot folder'),
             command=self._event('<<open_folder>>'),
         )
+        self._fileMenu.add_command(
+            label=_('Clean up Snapshot folder'),
+            command=self._event('<<clean_up>>'),
+        )
         self._fileMenu.add_separator()
         self._fileMenu.add_command(
             label=_('Snapshot'),
@@ -136,6 +140,21 @@ class SnapshotView(tk.Toplevel, SubController):
             label=_('Close'),
             accelerator=KEYS.QUIT_PROGRAM[1],
             command=self.on_quit,
+        )
+
+        # Export menu.
+        self._exportMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(
+            label=_('Export'),
+            menu=self._exportMenu,
+        )
+        self._exportMenu.add_command(
+            label=_('Manuscript'),
+            command=self._event('<<export_manuscript>>'),
+        )
+        self._exportMenu.add_command(
+            label=_('Plot grid'),
+            command=self._event('<<export_grid>>'),
         )
 
         # Help menu.

@@ -14,6 +14,8 @@ import sys
 import zipfile
 
 from nvlib.controller.sub_controller import SubController
+from nvlib.novx_globals import GRID_SUFFIX
+from nvlib.novx_globals import MANUSCRIPT_SUFFIX
 from nvlib.novx_globals import Notification
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_globals import FEATURE
@@ -66,7 +68,7 @@ class SnapshotService(SubController):
         self.prefs.update(self.configuration.settings)
         self.prefs.update(self.configuration.options)
 
-        # Set window icon.
+        # -- Set window icon.
         try:
             path = os.path.dirname(sys.argv[0])
             if not path:
@@ -177,6 +179,9 @@ class SnapshotService(SubController):
 
     def _bind_events(self):
         event_callbacks = {
+            '<<clean_up>>': self._clean_up_snapshot_dir,
+            '<<export_grid>>': self._export_grid,
+            '<<export_manuscript>>': self._export_manuscript,
             '<<make_snapshot>>': self.make_snapshot,
             '<<open_help>>': self._open_help,
             '<<remove_snapshot>>': self._remove_snapshot,
@@ -186,20 +191,35 @@ class SnapshotService(SubController):
         for sequence, callback in event_callbacks.items():
             self.snapshotView.master.winfo_toplevel().bind(sequence, callback)
 
+    def _clean_up_snapshot_dir(self, event=None):
+        # Clean up the snapshot folder.
+        snapshotDir = self._get_snapshot_dir()
+        if not os.path.isdir(snapshotDir):
+            return
+
+        for pattern in (
+            '*.bak',
+            '*.od?',
+        ):
+            for file in glob.iglob(
+                pattern,
+                root_dir=snapshotDir,
+            ):
+                try:
+                    os.remove(os.path.join(snapshotDir, file))
+                except:
+                    pass
+
     def _collect_snapshots(self):
         projectDir, projectFile = os.path.split(self._mdl.prjFile.filePath)
-        snapshotDir = os.path.join(
-            projectDir,
-            self.prefs['snapshot_subdir']
-        )
+        snapshotDir = os.path.join(projectDir, self.prefs['snapshot_subdir'])
         if not os.path.isdir(snapshotDir):
             return
 
         self.prjSnapshots.clear()
         prjName, __ = os.path.splitext(projectFile)
-        pattern = f'{prjName}.*{self.ZIP_EXTENSION}'
         prjSnapshotFiles = glob.glob(
-            pattern,
+            f'{prjName}.*{self.ZIP_EXTENSION}',
             root_dir=snapshotDir,
         )
         prjSnapshotFiles.sort()
@@ -261,12 +281,32 @@ class SnapshotService(SubController):
                 self._ctrl.fileManager.exporter.run(
                     novxFile,
                     suffix,
+                    **kwargs
                 )
             )
         except Notification as ex:
             self._ui.set_status(f'#{str(ex)}')
         except Exception as ex:
             self._ui.set_status(f'!{str(ex)}')
+
+    def _export_document(self, suffix, event=None):
+        self._ui.restore_status()
+        snapshotId = self.snapshotView.get_selection()
+        if snapshotId is None:
+            return
+
+        self._create_document(
+            self._get_zipfile_path(snapshotId),
+            suffix,
+            overwrite=True,
+            ask=True,
+        )
+
+    def _export_manuscript(self, event=None):
+        self._export_document(MANUSCRIPT_SUFFIX, event=event)
+
+    def _export_grid(self, event=None):
+        self._export_document(GRID_SUFFIX, event=event)
 
     def _get_snapshot_dir(self):
         projectDir, __ = os.path.split(self._mdl.prjFile.filePath)

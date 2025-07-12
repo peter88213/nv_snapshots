@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 0.9.0
+
+- Exporting manuscript and plot grid.
+- Implemented "Clean up snapshot folder" feature.
+
+API: 5.29
+Based on novelibre 5.29.7
+
+
 ### Version 0.8.1
 
 - Fixed multiple PLATFORM import issue.
