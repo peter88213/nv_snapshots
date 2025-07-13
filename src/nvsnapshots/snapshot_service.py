@@ -31,6 +31,7 @@ from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_globals import open_document
 from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
+from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_dialog import SnapshotDialog
 from nvsnapshots.snapshot_view import SnapshotView
 import tkinter as tk
@@ -100,10 +101,12 @@ class SnapshotService(SubController):
         self.snapshotComment = None
 
     def disable_menu(self):
-        self.snapshotView.disable_menu()
+        self.snapshotView.mainMenu.entryconfig(_('File'), state='disabled')
+        self.snapshotView.mainMenu.entryconfig(_('Export'), state='disabled')
 
     def enable_menu(self):
-        self.snapshotView.enable_menu()
+        self.snapshotView.mainMenu.entryconfig(_('File'), state='normal')
+        self.snapshotView.mainMenu.entryconfig(_('Export'), state='normal')
 
     def make_snapshot(self, doNotAsk=False, event=None):
         self._ui.restore_status()
@@ -207,7 +210,10 @@ class SnapshotService(SubController):
             '<<open_folder>>': self._open_folder,
         }
         for sequence, callback in event_callbacks.items():
-            self.snapshotView.master.winfo_toplevel().bind(sequence, callback)
+            self.snapshotView.bind(sequence, callback)
+        self.snapshotView.bind(KEYS.MAKE_SNAPSHOT[0], self.make_snapshot)
+        self.snapshotView.bind(KEYS.OPEN_HELP[0], self._open_help)
+        self.snapshotView.bind(KEYS.DELETE[0], self._remove_snapshot)
 
     def _clean_up_snapshot_dir(self, event=None):
         # Clean up the snapshot folder.
@@ -401,6 +407,7 @@ class SnapshotService(SubController):
                 parent=self.snapshotView,
             ):
                 os.remove(self._get_zipfile_path(snapshotId))
+                self.refresh()
         except ValueError as ex:
             self._ui.set_status(
                 (
@@ -408,7 +415,6 @@ class SnapshotService(SubController):
                     f'{str(ex)}'
                 )
             )
-        self.refresh()
 
     def _revert(self, event=None):
         self._ui.restore_status()
