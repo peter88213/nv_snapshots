@@ -37,8 +37,6 @@ class SnapshotView(tk.Toplevel):
         self.geometry(f"{self.prefs['window_geometry']}")
 
         self.title(FEATURE)
-        self.statusText = ''
-
         self.lift()
         self.focus()
 
