@@ -4,12 +4,19 @@
 
 ## Changelog
 
+### Version 5.0.1
+
+Refactored, providing a menu class.
+
+API: 5.29
+Based on novelibre 5.29.8
+
 
 ### Version 5.0.0
 
 - Fixed build script.
 
-API: 5.0
+API: 5.29
 Based on novelibre 5.29.7
 
 

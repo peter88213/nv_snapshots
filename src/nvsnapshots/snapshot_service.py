@@ -162,10 +162,15 @@ class SnapshotService(SubController):
         self.configuration.write(self.iniFile)
 
     def refresh(self):
+        if not self.snapshotView:
+            return
+
+        if not self.snapshotView.isOpen:
+            return
+
         self._collect_snapshots()
-        if self.snapshotView:
-            self.snapshotView.snapshots = self.prjSnapshots
-            self.snapshotView.build_tree()
+        self.snapshotView.snapshots = self.prjSnapshots
+        self.snapshotView.build_tree()
 
     def start_manager(self):
 
