@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.0.0
+
+- Fixed build script.
+
+API: 5.0
+Based on novelibre 5.29.7
+
+
 ### Version 1.0.0
 
 Feature complete.
