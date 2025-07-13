@@ -6,7 +6,9 @@
 
 ### Version 5.0.1
 
-Refactored, providing a menu class.
+- Fixed a bug where an exception is raised after making a snapshot while 
+  the viewer is closed.
+- Refactored the code, providing a menu class.
 
 API: 5.29
 Based on novelibre 5.29.8
