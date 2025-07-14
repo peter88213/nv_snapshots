@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.1.pyzw)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.2.pyzw)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News/Feedback](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_snapshots/)
@@ -8,16 +8,19 @@
 
 The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
-*nv_snapshots* is a plugin providing a snapshot manager. 
+The *nv_snapshots* plugin provides a lightweight version control for *novelibre* projects. 
 
 ![Screenshot](docs/Screenshots/screen01.png)
 
 ## Features
 
-- Snapshots are user defined versions of a project file. 
-- Snapshot are zipfiles containing the `.novx` file and a descriptive text file. 
-- Snapshots are located in a `snapshot` subdirectory of the project folder. 
-- Saving a snapshot is manually triggered via `Ctrl`-`Alt`-`S` or a "File" menu command.
+A snapshot is a compressed, titled, and commented version of a `.novx` file.
+
+- *nv_snapshots* creates such snapshots on demand and stores them 
+  in a subdirectory of the project folder.
+- With the snapshot manager, you can select individual snapshots and export documents from them 
+  for comparison with the current project.
+- You can also easily revert to a snapshot.
 
 ## Requirements
 
@@ -27,10 +30,10 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_snapshots_v5.0.1.pyzw](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.1.pyzw)
+Download the latest release [nv_snapshots_v5.0.2.pyzw](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.2.pyzw)
 
-- Launch *nv_snapshots_v5.0.1.pyzw* by double-clicking (Windows/Linux desktop),
-- or execute `python nv_snapshots_v5.0.1.pyzw` (Windows), resp. `python3 nv_snapshots_v5.0.1.pyzw` (Linux) on the command line.
+- Launch *nv_snapshots_v5.0.2.pyzw* by double-clicking (Windows/Linux desktop),
+- or execute `python nv_snapshots_v5.0.2.pyzw` (Windows), resp. `python3 nv_snapshots_v5.0.2.pyzw` (Linux) on the command line.
 
 #### Important
 
@@ -46,9 +49,9 @@ the zip file.
 
 ### Alternative: Zip file
 
-The package is also available in zip format: [nv_snapshots_v5.0.1.zip](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.1.zip)
+The package is also available in zip format: [nv_snapshots_v5.0.2.zip](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.2.zip)
 
-- Extract the *nv_snapshots_v5.0.1* folder from the downloaded zipfile "nv_snapshots_v5.0.1.zip".
+- Extract the *nv_snapshots_v5.0.2* folder from the downloaded zipfile "nv_snapshots_v5.0.2.zip".
 - Move into this new folder and launch *setup.pyw* by double-clicking (Windows/Linux desktop), 
 - or execute `python setup.pyw` (Windows), resp. `python3 setup.pyw` (Linux) on the command line.
 

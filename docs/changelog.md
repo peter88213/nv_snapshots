@@ -4,6 +4,15 @@
 
 ## Changelog
 
+
+### Version 5.0.2
+
+- Refactored, removing dead code.
+
+API: 5.29
+Based on novelibre 5.29.8
+
+
 ### Version 5.0.1
 
 - Fixed a bug where an exception is raised after making a snapshot while 
