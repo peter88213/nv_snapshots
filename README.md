@@ -14,13 +14,13 @@ The *nv_snapshots* plugin provides a lightweight version control for *novelibre*
 
 ## Features
 
-A snapshot is a compressed, titled, and commented version of a `.novx` file.
+A snapshot is a compressed, titled, and commented version of a *.novx* file.
 
 - *nv_snapshots* creates such snapshots on demand and stores them 
   in a subdirectory of the project folder.
 - With the snapshot manager, you can select individual snapshots and export documents from them 
   for comparison with the current project.
-- You can also easily revert to a snapshot.
+- You can easily revert to any snapshot.
 
 ## Requirements
 
