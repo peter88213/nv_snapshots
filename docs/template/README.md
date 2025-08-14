@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v0.99.0.pyzw)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v0.99.0.pyz)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News/Feedback](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_snapshots/)
@@ -30,10 +30,10 @@ A snapshot is a compressed, titled, and commented version of a *.novx* file.
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_snapshots_v0.99.0.pyzw](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v0.99.0.pyzw)
+Download the latest release [nv_snapshots_v0.99.0.pyz](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v0.99.0.pyz)
 
-- Launch *nv_snapshots_v0.99.0.pyzw* by double-clicking (Windows/Linux desktop),
-- or execute `python nv_snapshots_v0.99.0.pyzw` (Windows), resp. `python3 nv_snapshots_v0.99.0.pyzw` (Linux) on the command line.
+- Launch *nv_snapshots_v0.99.0.pyz* by double-clicking (Windows/Linux desktop),
+- or execute `python nv_snapshots_v0.99.0.pyz` (Windows), resp. `python3 nv_snapshots_v0.99.0.pyz` (Linux) on the command line.
 
 #### Important
 
