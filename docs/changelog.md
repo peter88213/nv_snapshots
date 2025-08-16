@@ -10,7 +10,7 @@
 - Refactored, removing dead code.
 
 API: 5.29
-Based on novelibre 5.29.8
+Based on novelibre 5.29.8 (5.30.0)
 
 
 ### Version 5.0.1
