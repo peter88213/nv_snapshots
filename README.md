@@ -32,13 +32,13 @@ A snapshot is a compressed, titled, and commented version of a *.novx* file.
 
 Download the latest release [nv_snapshots_v5.0.2.pyz](https://github.com/peter88213/nv_snapshots/raw/main/dist/nv_snapshots_v5.0.2.pyz)
 
-- Launch *nv_snapshots_v5.0.2.pyz* by double-clicking (Windows/Linux desktop),
+- Launch *nv_snapshots_v5.0.2.pyz* by double-clicking (Windows desktop),
 - or execute `python nv_snapshots_v5.0.2.pyz` (Windows), resp. `python3 nv_snapshots_v5.0.2.pyz` (Linux) on the command line.
 
 #### Important
 
 Many web browsers recognize the download as an executable file and offer to open it immediately. 
-This starts the installation.
+This starts the installation under Windows.
 
 However, depending on your security settings, your browser may 
 initially  refuse  to download the executable file. 
