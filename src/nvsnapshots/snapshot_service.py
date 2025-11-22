@@ -21,7 +21,6 @@ from nvlib.novx_globals import GRID_SUFFIX
 from nvlib.novx_globals import ITEMS_SUFFIX
 from nvlib.novx_globals import LOCATIONS_SUFFIX
 from nvlib.novx_globals import MANUSCRIPT_SUFFIX
-from nvlib.novx_globals import Notification
 from nvlib.novx_globals import PARTS_SUFFIX
 from nvlib.novx_globals import PLOTLINES_SUFFIX
 from nvlib.novx_globals import SECTIONS_SUFFIX
@@ -312,7 +311,7 @@ class SnapshotService(SubController):
                     **kwargs
                 )
             )
-        except Notification as ex:
+        except UserWarning as ex:
             self._ui.set_status(f'#{str(ex)}')
         except Exception as ex:
             self._ui.set_status(f'!{str(ex)}')
