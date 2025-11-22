@@ -288,10 +288,8 @@ class SnapshotService(SubController):
         self._ui.restore_status()
         if not os.path.isfile(sourcePath):
             self._ui.set_status(
-                (
-                    f'!{_("File not found")}: '
-                    f'"{norm_path(sourcePath)}".'
-                )
+                f'!{_("File not found")}: '
+                f'"{norm_path(sourcePath)}".'
             )
             return
 
