@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.1.0
+
+- Updated the code for compatibility with novelibre 5.43. 
+- Fixed error in de.po.
+
+API: 5.43
+Based on novelibre 5.43.3
+
+
 ### Version 5.0.2
 
 - Refactored, removing dead code.

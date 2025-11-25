@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.2\n"
+"Project-Id-Version: 5.1.0\n"
 "POT-Creation-Date: 2025-08-16 15:18:36\n"
-"PO-Revision-Date: 2025-08-16 15:18:36\n"
+"PO-Revision-Date: 2025-11-25 16:55:48\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,9 @@ msgstr "Automatisch erzeugter Schnappschuss"
 msgid "Before reverting to {} \n\"{}\""
 msgstr "Vor der Rückkehr zu {} \n\"{}\""
 
+msgid "Bio"
+msgstr "Biographie"
+
 msgid "Can not remove snapshot"
 msgstr "Kann Schnappschuss nicht entfernen"
 
@@ -42,6 +45,9 @@ msgstr "Kapitelbeschreibungen"
 
 msgid "Character descriptions"
 msgstr "Figurenbeschreibungen"
+
+msgid "Characterization"
+msgstr "Charakterisierung"
 
 msgid "Clean up Snapshot folder"
 msgstr "Schnappschuss-Ordner aufräumen"
@@ -67,6 +73,9 @@ msgstr "Fertiggestellt"
 msgid "Draft"
 msgstr "Entwurf"
 
+msgid "Ending"
+msgstr "Ende"
+
 msgid "Export"
 msgstr "Exportieren"
 
@@ -78,6 +87,9 @@ msgstr "Datei nicht gefunden"
 
 msgid "File type is not supported"
 msgstr "Dateityp wird nicht unterstützt"
+
+msgid "Goals"
+msgstr "Ziele"
 
 msgid "Help"
 msgstr "Hilfe"
@@ -106,17 +118,26 @@ msgstr "Online-Hilfe"
 msgid "Open Snapshot folder"
 msgstr "Schnappschuss-Ordner öffnen"
 
+msgid "Opening"
+msgstr "Eröffnung"
+
 msgid "Outline"
 msgstr "Gliederung"
 
 msgid "Part descriptions"
 msgstr "Teilebeschreibungen"
 
+msgid "Peak emotional moment"
+msgstr "Emotionaler Höhepunkt"
+
 msgid "Plot grid"
 msgstr "Handlungsraster (Plot grid)"
 
 msgid "Plot line descriptions"
 msgstr "Plotlinienbeschreibungen"
+
+msgid "Plot progress"
+msgstr "Handlungsfortschritt"
 
 msgid "Remove"
 msgstr "Entfernen"
@@ -175,9 +196,11 @@ msgstr "Wörter"
 msgid "Work phase"
 msgstr "Arbeitsphase"
 
+msgid "World building"
+msgstr "Weltenbau"
+
 msgid "XML data files"
 msgstr "XML-Datendateien"
 
 msgid "https://peter88213.github.io/nvhelp-en"
 msgstr "https://peter88213.github.io/nvhelp-de"
-

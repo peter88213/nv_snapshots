@@ -31,7 +31,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """novelibre snapshot manager plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.29'
+    API_VERSION = '5.43'
     DESCRIPTION = 'A snapshot manager'
     URL = 'https://github.com/peter88213/nv_snapshots'
 
