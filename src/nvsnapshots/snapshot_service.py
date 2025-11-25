@@ -412,14 +412,16 @@ class SnapshotService(SubController):
                 self.refresh()
         except ValueError as ex:
             self._ui.set_status(
-                (
-                    f'!{_("Can not remove snapshot")}: '
-                    f'{str(ex)}'
-                )
+                f'!{_("Can not remove snapshot")}: '
+                f'{str(ex)}'
             )
 
     def _revert(self, event=None):
         self._ui.restore_status()
+
+        if self._ctrl.check_lock():
+            return
+
         snapshotIdToRestore = self.snapshotView.get_selection()
         if snapshotIdToRestore is None:
             return
@@ -494,10 +496,8 @@ class SnapshotService(SubController):
 
                 # Write descriptive text file.
                 z.writestr(
-                    (
-                        f'{self._sanitize_filename(self.snapshotTitle)}'
-                        f'{self.DESC_EXTENSION}'
-                    ),
+                    f'{self._sanitize_filename(self.snapshotTitle)}'
+                    f'{self.DESC_EXTENSION}'
                     f'{self.snapshotTitle}\n\n{self.snapshotComment}',
                     compress_type=zipfile.ZIP_DEFLATED,
                 )

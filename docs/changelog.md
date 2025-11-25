@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.2.0
+
+- When the project is locked, unlocking is required before reverting to a snapshot (#1).
+
+API: 5.43
+Based on novelibre 5.43.5
+
+
 ### Version 5.1.0
 
 - Updated the code for compatibility with novelibre 5.43. 
