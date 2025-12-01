@@ -15,9 +15,6 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-
-from pathlib import Path
-
 from nvsnapshots.nvsnapshots_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvsnapshots.nvsnapshots_globals import FEATURE
@@ -25,32 +22,19 @@ from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_service import SnapshotService
 from nvsnapshots.nvsnapshots_globals import icons
-import tkinter as tk
 
 
 class Plugin(PluginBase):
     """novelibre snapshot manager plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.43'
+    API_VERSION = '5.44'
     DESCRIPTION = 'A snapshot manager'
     URL = 'https://github.com/peter88213/nv_snapshots'
 
     def disable_menu(self):
-        """Disable menu entries when no project is open.        
-        
-        Overrides the SubController method.
-        """
-        self._ui.fileMenu.entryconfig(_('Snapshot'), state='disabled')
-        self._ui.toolsMenu.entryconfig(FEATURE, state='disabled')
         self.snapshotService.disable_menu()
 
     def enable_menu(self):
-        """Enable menu entries when a project is open.
-        
-        Overrides the SubController method.
-        """
-        self._ui.fileMenu.entryconfig(_('Snapshot'), state='normal')
-        self._ui.toolsMenu.entryconfig(FEATURE, state='normal')
         self.snapshotService.enable_menu()
 
     def install(self, model, view, controller):
@@ -65,38 +49,48 @@ class Plugin(PluginBase):
         """
         super().install(model, view, controller)
         self.snapshotService = SnapshotService(model, view, controller)
-        self._icon = self._get_icon('snapshot.png')
+        icons['snapshot'] = self._icon = self._get_icon('snapshot.png')
+
+        #--- Configure the main menu.
 
         # Create an entry to the File menu.
         pos = self._ui.fileMenu.index(_('Save')) - 1
         self._ui.fileMenu.insert_separator(pos)
         pos += 1
+
+        label = _('Snapshot')
         self._ui.fileMenu.insert_command(
             pos,
-            label=_('Snapshot'),
+            label=label,
             accelerator=KEYS.MAKE_SNAPSHOT[1],
             image=self._icon,
             compound='left',
             command=self.make_snapshot,
             state='disabled',
         )
+        self._ui.fileMenu.disableOnClose.append(label)
 
         # Create an entry to the Tools menu.
+        label = FEATURE
         self._ui.toolsMenu.add_command(
-            label=FEATURE,
+            label=label,
             image=self._icon,
             compound='left',
             command=self.start_manager,
             state='disabled',
         )
+        self._ui.toolsMenu.disableOnClose.append(label)
 
         # Add an entry to the Help menu.
+        label = _('Snapshots plugin Online help')
         self._ui.helpMenu.add_command(
-            label=_('Snapshots plugin Online help'),
+            label=label,
             image=self._icon,
             compound='left',
             command=self.open_help,
-            )
+        )
+
+        #--- Set Key bindings.
         self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], self.make_snapshot)
 
     def on_close(self):
@@ -119,20 +113,4 @@ class Plugin(PluginBase):
 
     def make_snapshot(self, event=None):
         self.snapshotService.make_snapshot()
-
-    def _get_icon(self, fileName):
-        # Return the icon for the main view.
-        if self._ctrl.get_preferences().get('large_icons', False):
-            size = 24
-        else:
-            size = 16
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            iconPath = f'{homeDir}/.novx/icons/{size}'
-            icon = tk.PhotoImage(file=f'{iconPath}/{fileName}')
-            icons['snapshot'] = icon
-
-        except:
-            icon = None
-        return icon
 

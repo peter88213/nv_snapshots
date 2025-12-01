@@ -5,12 +5,13 @@
 ## Changelog
 
 
-### Version 5.2.0
+### Version 5.2.1
 
+- Using the menu methods provided with novelibre 5.44.
 - When the project is locked, unlocking is required before reverting to a snapshot (#1).
 
-API: 5.43
-Based on novelibre 5.43.5
+API: 5.44
+Based on novelibre 5.44.3
 
 
 ### Version 5.1.0

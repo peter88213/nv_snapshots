@@ -24,7 +24,7 @@ A snapshot is a compressed, titled, and commented version of a *.novx* file.
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 5.43+
+- [novelibre](https://github.com/peter88213/novelibre/) version 5.44+
 
 ## Download and install
 
