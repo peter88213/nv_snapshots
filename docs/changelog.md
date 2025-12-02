@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.2.2
+
+- Fixed a regression from version 5.2.1 where snapshot metadata is not included.
+
+API: 5.44
+Based on novelibre 5.44.4
+
+
 ### Version 5.2.1
 
 - Using the menu methods provided with novelibre 5.44.

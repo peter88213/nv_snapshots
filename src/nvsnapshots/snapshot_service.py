@@ -496,8 +496,10 @@ class SnapshotService(SubController):
 
                 # Write descriptive text file.
                 z.writestr(
-                    f'{self._sanitize_filename(self.snapshotTitle)}'
-                    f'{self.DESC_EXTENSION}'
+                    (
+                        f'{self._sanitize_filename(self.snapshotTitle)}'
+                        f'{self.DESC_EXTENSION}'
+                    ),
                     f'{self.snapshotTitle}\n\n{self.snapshotComment}',
                     compress_type=zipfile.ZIP_DEFLATED,
                 )
