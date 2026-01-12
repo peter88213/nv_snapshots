@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.3.0
+
+- Refactored the code for better maintainability.
+
+API: 5.50
+Based on novelibre 5.50.0
+
+
 ### Version 5.2.2
 
 - Fixed a regression from version 5.2.1 where snapshot metadata is not included.
