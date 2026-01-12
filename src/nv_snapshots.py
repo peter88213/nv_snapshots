@@ -27,7 +27,7 @@ from nvsnapshots.nvsnapshots_globals import icons
 class Plugin(PluginBase):
     """novelibre snapshot manager plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.44'
+    API_VERSION = '5.50'
     DESCRIPTION = 'A snapshot manager'
     URL = 'https://github.com/peter88213/nv_snapshots'
 
