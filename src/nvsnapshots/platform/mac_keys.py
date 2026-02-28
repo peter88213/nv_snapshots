@@ -10,4 +10,4 @@ from nvsnapshots.platform.generic_keys import GenericKeys
 class MacKeys(GenericKeys):
 
     QUIT_PROGRAM = ('<Command-q>', 'Cmd-Q')
-    MAKE_SNAPSHOT = ('<Command-Alt-s>', 'Cmd-Alt-S')
+    MAKE_SNAPSHOT = ('<Command-Option-s>', 'Cmd-Option-S')
