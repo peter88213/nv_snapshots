@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.3.1
+
+- Mac keys: Replaced "Alt" with "Option".
+
+API: 5.50
+Based on novelibre 5.53.4
+
+
 ### Version 5.3.0
 
 - Refactored the code for better maintainability.
