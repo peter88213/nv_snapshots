@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.3.2
+
+- Keeping the modal dialog always in front.
+
+API: 5.50
+Based on novelibre 5.62.2
+
+
 ### Version 5.3.1
 
 - Mac keys: Replaced "Alt" with "Option".
