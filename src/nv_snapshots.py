@@ -38,7 +38,7 @@ class Plugin(PluginBase):
         self.snapshotService.enable_menu()
 
     def install(self, model, view, controller):
-        """Add a submenu to the 'File' menu.
+        """Install the plugin at runtime.
         
         Positional arguments:
             model -- reference to the novelibre main model instance.
@@ -53,7 +53,7 @@ class Plugin(PluginBase):
 
         #--- Configure the main menu.
 
-        # Create an entry to the File menu.
+        # Add an entry to the File menu.
         pos = self._ui.fileMenu.index(_('Save')) - 1
         self._ui.fileMenu.insert_separator(pos)
         pos += 1
