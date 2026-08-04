@@ -110,13 +110,8 @@ class NvsnapshotsMenu(tk.Menu):
         )
 
         # Help menu.
-        self._helpMenu = tk.Menu(self, tearoff=0)
         self.add_cascade(
             label=_('Help'),
-            menu=self._helpMenu,
-        )
-        self._helpMenu.add_command(
-            label=_('Online help'),
             accelerator=KEYS.OPEN_HELP[1],
             command=self._event('<<open_help>>'),
         )

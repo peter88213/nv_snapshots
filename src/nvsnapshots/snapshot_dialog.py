@@ -8,16 +8,16 @@ from tkinter import ttk
 
 from nvlib.gui.widgets.index_card import IndexCard
 from nvlib.gui.widgets.modal_dialog import ModalDialog
-from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
 
 
 class SnapshotDialog(ModalDialog):
 
-    def __init__(self, view, service, **kw):
+    def __init__(self, view, controller, service, **kw):
         super().__init__(view, **kw)
         self._ui = view
+        self._ctrl = controller
         self._service = service
 
         self.title(_('Snapshot description'))
@@ -53,7 +53,7 @@ class SnapshotDialog(ModalDialog):
         # "Help" button.
         ttk.Button(
             buttons_frame,
-            text=_('Online help'),
+            text=_('Help'),
             command=self._open_help
         ).pack(padx=5, pady=5, side='right')
 
@@ -63,7 +63,7 @@ class SnapshotDialog(ModalDialog):
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
 
     def _open_help(self, event=None):
-        Nvsnapshotshelp.open_help_page()
+        self._ctrl.helpService.open_help_page('nv_snapshots')
 
     def _set_description(self, event=None):
         snapshotTitle = self._indexCard.title.get()

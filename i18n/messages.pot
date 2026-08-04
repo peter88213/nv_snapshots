@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.3.2\n"
-"POT-Creation-Date: 2026-07-20 19:39:17\n"
+"Project-Id-Version: 5.4.0\n"
+"POT-Creation-Date: 2026-08-04 18:56:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -113,9 +113,6 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-msgid "Online help"
-msgstr ""
-
 msgid "Open Snapshot folder"
 msgstr ""
 
@@ -176,7 +173,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-msgid "Snapshots plugin Online help"
+msgid "Snapshots plugin help"
 msgstr ""
 
 msgid "Story structure"
@@ -201,7 +198,4 @@ msgid "World building"
 msgstr ""
 
 msgid "XML data files"
-msgstr ""
-
-msgid "https://peter88213.github.io/nvhelp-en"
 msgstr ""

@@ -28,7 +28,6 @@ from nvlib.novx_globals import STAGES_SUFFIX
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_globals import open_document
-from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_dialog import SnapshotDialog
@@ -137,7 +136,7 @@ class SnapshotService(SubController):
             return
 
         #--- Open a dialog for title/comment input.
-        SnapshotDialog(self._ui, self)
+        SnapshotDialog(self._ui, self._ctrl, self)
 
     def on_close(self):
         self.prjSnapshots.clear()
@@ -393,7 +392,7 @@ class SnapshotService(SubController):
         open_document(snapshotDir)
 
     def _open_help(self, event=None):
-        Nvsnapshotshelp.open_help_page()
+        self._ctrl.helpService.open_help_page('nv_snapshots')
 
     def _remove_snapshot(self, event=None):
         self._ui.restore_status()

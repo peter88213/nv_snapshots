@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.4.0
+
+- Using the novelibre 5.63+ help service.
+- Refactored the code
+
+API: 5.63
+Based on novelibre 5.63.0
+
+
 ### Version 5.3.2
 
 - Keeping the modal dialog always in front.

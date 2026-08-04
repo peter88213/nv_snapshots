@@ -18,7 +18,6 @@ GNU General Public License for more details.
 from nvsnapshots.nvsnapshots_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvsnapshots.nvsnapshots_globals import FEATURE
-from nvsnapshots.nvsnapshots_help import Nvsnapshotshelp
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_service import SnapshotService
 from nvsnapshots.nvsnapshots_globals import icons
@@ -27,7 +26,7 @@ from nvsnapshots.nvsnapshots_globals import icons
 class Plugin(PluginBase):
     """novelibre snapshot manager plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.50'
+    API_VERSION = '5.63'
     DESCRIPTION = 'A snapshot manager'
     URL = 'https://github.com/peter88213/nv_snapshots'
 
@@ -51,7 +50,16 @@ class Plugin(PluginBase):
         self.snapshotService = SnapshotService(model, view, controller)
         icons['snapshot'] = self._icon = self._get_icon('snapshot.png')
 
-        #--- Configure the main menu.
+        #--- Configure the user interface.
+
+        def open_help():
+            self._ctrl.helpService.open_help_page('nv_snapshots')
+
+        def start_manager():
+            self.snapshotService.start_manager()
+
+        def make_snapshot(event=None):
+            self.snapshotService.make_snapshot()
 
         # Add an entry to the File menu.
         pos = self._ui.fileMenu.index(_('Save')) - 1
@@ -65,7 +73,7 @@ class Plugin(PluginBase):
             accelerator=KEYS.MAKE_SNAPSHOT[1],
             image=self._icon,
             compound='left',
-            command=self.make_snapshot,
+            command=make_snapshot,
             state='disabled',
         )
         self._ui.fileMenu.disableOnClose.append(label)
@@ -76,22 +84,22 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            command=self.start_manager,
+            command=start_manager,
             state='disabled',
         )
         self._ui.toolsMenu.disableOnClose.append(label)
 
         # Add an entry to the Help menu.
-        label = _('Snapshots plugin Online help')
+        label = _('Snapshots plugin help')
         self._ui.helpMenu.add_command(
             label=label,
             image=self._icon,
             compound='left',
-            command=self.open_help,
+            command=open_help,
         )
 
-        #--- Set Key bindings.
-        self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], self.make_snapshot)
+        # Hotkey to create a snapshot.
+        self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], make_snapshot)
 
     def on_close(self):
         """Actions to be performed before a project is closed."""
@@ -104,13 +112,4 @@ class Plugin(PluginBase):
     def on_quit(self):
         """Actions to be performed before the application is closed."""
         self.snapshotService.on_quit()
-
-    def open_help(self, event=None):
-        Nvsnapshotshelp.open_help_page()
-
-    def start_manager(self):
-        self.snapshotService.start_manager()
-
-    def make_snapshot(self, event=None):
-        self.snapshotService.make_snapshot()
 
