@@ -54,12 +54,6 @@ class Plugin(PluginBase):
 
         #--- Configure the user interface.
 
-        def start_manager():
-            self.snapshotService.start_manager()
-
-        def make_snapshot(event=None):
-            self.snapshotService.make_snapshot()
-
         # Add an entry to the File menu.
         pos = self._ui.fileMenu.index(_('Save')) - 1
         self._ui.fileMenu.insert_separator(pos)
@@ -72,7 +66,7 @@ class Plugin(PluginBase):
             accelerator=KEYS.MAKE_SNAPSHOT[1],
             image=self._icon,
             compound='left',
-            command=make_snapshot,
+            command=self.snapshotService.make_snapshot,
             state='disabled',
         )
         self._ui.fileMenu.disableOnClose.append(label)
@@ -83,7 +77,7 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            command=start_manager,
+            command=self.snapshotService.start_manager,
             state='disabled',
         )
         self._ui.toolsMenu.disableOnClose.append(label)
@@ -91,7 +85,10 @@ class Plugin(PluginBase):
         self._add_help_menu_entry(_('Snapshots plugin help'))
 
         # Hotkey to create a snapshot.
-        self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], make_snapshot)
+        self._ui.root.bind(
+            KEYS.MAKE_SNAPSHOT[0],
+            self.snapshotService.make_snapshot
+        )
 
     def on_close(self):
         """Actions to be performed before a project is closed."""
