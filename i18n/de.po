@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.4.0\n"
+"Project-Id-Version: 5.4.1\n"
 "POT-Creation-Date: 2025-08-16 15:18:36\n"
-"PO-Revision-Date: 2026-08-04 18:42:03\n"
+"PO-Revision-Date: 2026-08-05 10:15:52\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -112,9 +112,6 @@ msgstr "Nebenfigur"
 msgid "Ok"
 msgstr "Ok"
 
-msgid "Online help"
-msgstr "Online-Hilfe"
-
 msgid "Open Snapshot folder"
 msgstr "Schnappschuss-Ordner öffnen"
 
@@ -201,6 +198,3 @@ msgstr "Weltenbau"
 
 msgid "XML data files"
 msgstr "XML-Datendateien"
-
-msgid "https://peter88213.github.io/nvhelp-en"
-msgstr "https://peter88213.github.io/nvhelp-de"

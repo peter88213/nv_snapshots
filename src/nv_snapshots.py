@@ -18,6 +18,7 @@ GNU General Public License for more details.
 from nvsnapshots.nvsnapshots_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvsnapshots.nvsnapshots_globals import FEATURE
+from nvsnapshots.nvsnapshots_globals import HELP_PAGE
 from nvsnapshots.platform.platform_settings import KEYS
 from nvsnapshots.snapshot_service import SnapshotService
 from nvsnapshots.nvsnapshots_globals import icons
@@ -29,6 +30,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.63'
     DESCRIPTION = 'A snapshot manager'
     URL = 'https://github.com/peter88213/nv_snapshots'
+    HELP_PAGE = HELP_PAGE
 
     def disable_menu(self):
         self.snapshotService.disable_menu()
@@ -51,9 +53,6 @@ class Plugin(PluginBase):
         icons['snapshot'] = self._icon = self._get_icon('snapshot.png')
 
         #--- Configure the user interface.
-
-        def open_help():
-            self._ctrl.helpService.open_help_page('nv_snapshots')
 
         def start_manager():
             self.snapshotService.start_manager()
@@ -89,14 +88,7 @@ class Plugin(PluginBase):
         )
         self._ui.toolsMenu.disableOnClose.append(label)
 
-        # Add an entry to the Help menu.
-        label = _('Snapshots plugin help')
-        self._ui.helpMenu.add_command(
-            label=label,
-            image=self._icon,
-            compound='left',
-            command=open_help,
-        )
+        self._add_help_menu_entry(_('Snapshots plugin help'))
 
         # Hotkey to create a snapshot.
         self._ui.root.bind(KEYS.MAKE_SNAPSHOT[0], make_snapshot)

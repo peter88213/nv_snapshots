@@ -11,6 +11,7 @@ from nvlib.novx_globals import norm_path
 from nvsnapshots.platform.platform_settings import PLATFORM
 
 FEATURE = _('Snapshots')
+HELP_PAGE = 'nv_snapshots'
 
 icons = {
     'snapshot': None,

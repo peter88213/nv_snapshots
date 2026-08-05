@@ -27,6 +27,7 @@ from nvlib.novx_globals import SECTIONS_SUFFIX
 from nvlib.novx_globals import STAGES_SUFFIX
 from nvlib.novx_globals import norm_path
 from nvsnapshots.nvsnapshots_globals import FEATURE
+from nvsnapshots.nvsnapshots_globals import HELP_PAGE
 from nvsnapshots.nvsnapshots_globals import open_document
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
@@ -392,7 +393,7 @@ class SnapshotService(SubController):
         open_document(snapshotDir)
 
     def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page('nv_snapshots')
+        self._ctrl.helpService.open_help_page(HELP_PAGE)
 
     def _remove_snapshot(self, event=None):
         self._ui.restore_status()
