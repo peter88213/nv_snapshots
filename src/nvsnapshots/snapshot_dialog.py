@@ -64,7 +64,7 @@ class SnapshotDialog(ModalDialog):
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
 
     def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page(HELP_PAGE)
+        self._ctrl.open_help(page=HELP_PAGE)
 
     def _set_description(self, event=None):
         snapshotTitle = self._indexCard.title.get()

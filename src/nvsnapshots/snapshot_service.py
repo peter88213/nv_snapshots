@@ -393,7 +393,7 @@ class SnapshotService(SubController):
         open_document(snapshotDir)
 
     def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page(HELP_PAGE)
+        self._ctrl.open_help(page=HELP_PAGE)
 
     def _remove_snapshot(self, event=None):
         self._ui.restore_status()
