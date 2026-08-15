@@ -45,8 +45,8 @@ class SnapshotView(tk.Toplevel):
         self.config(menu=self.mainMenu)
 
         # Main window.
-        self._mainWindow = ttk.Frame(self)
-        self._mainWindow.pack(
+        self.window = ttk.Frame(self)
+        self.window.pack(
             fill='both',
             padx=2,
             pady=2,
@@ -55,7 +55,7 @@ class SnapshotView(tk.Toplevel):
 
         # Tree for snapshot selection.
         self._treeView = ttk.Treeview(
-            self._mainWindow,
+            self.window,
             columns=tuple(self._COLUMNS),
             show='headings',
             selectmode='browse',
@@ -86,9 +86,12 @@ class SnapshotView(tk.Toplevel):
             )
 
         # "Index card" in the right frame.
+        prefs = self._ctrl.get_preferences()
         self._indexCard = IndexCard(
-            self._mainWindow,
+            self.window,
             bd=2,
+            fg=prefs['color_text_fg'],
+            bg=prefs['color_text_bg'],
             relief='ridge',
             width=prefs['right_frame_width'],
         )

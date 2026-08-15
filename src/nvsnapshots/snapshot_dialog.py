@@ -11,6 +11,7 @@ from nvlib.gui.widgets.modal_dialog import ModalDialog
 from nvsnapshots.nvsnapshots_globals import HELP_PAGE
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.platform.platform_settings import KEYS
+import tkinter as tk
 
 
 class SnapshotDialog(ModalDialog):
@@ -22,38 +23,40 @@ class SnapshotDialog(ModalDialog):
         self._service = service
 
         self.title(_('Snapshot description'))
-        mainWindow = ttk.Frame(self)
-        mainWindow.pack(
-            fill='both',
-            padx=5,
-            pady=5
+
+        # "Index card".
+        prefs = self._ctrl.get_preferences()
+        self._indexCard = IndexCard(
+            self,
+            bd=2,
+            fg=prefs['color_text_fg'],
+            bg=prefs['color_text_bg'],
+            relief='ridge'
         )
-        #--- "Index card" in the right frame.
-        self._indexCard = IndexCard(mainWindow, bd=2, relief='ridge')
         self._indexCard.bodyBox['height'] = 13
         self._indexCard.bodyBox['width'] = 40
         self._indexCard.pack()
 
-        buttons_frame = ttk.Frame(mainWindow)
-        buttons_frame.pack(fill='both')
+        footer = tk.Frame(self)
+        footer.pack(fill='both')
 
         # Button: Change backup directory.
         ttk.Button(
-            buttons_frame,
+            footer,
             text=_('Ok'),
             command=self._set_description,
         ).pack(padx=5, pady=5, side='left')
 
         # Button: Cancel.
         ttk.Button(
-            buttons_frame,
+            footer,
             text=_('Cancel'),
             command=self.destroy,
         ).pack(padx=5, pady=5, side='right')
 
         # "Help" button.
         ttk.Button(
-            buttons_frame,
+            footer,
             text=_('Help'),
             command=self._open_help
         ).pack(padx=5, pady=5, side='right')
