@@ -41,7 +41,7 @@ class SnapshotService(SubController):
     INI_FILEPATH = '.novx/config'
     SETTINGS = dict(
         snapshot_subdir='Snapshots',
-        window_geometry='1270x250',
+        window_geometry='1270x300',
         right_frame_width=350,
         id_width=160,
         title_width=240,

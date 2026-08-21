@@ -19,6 +19,9 @@ import tkinter as tk
 
 class SnapshotView(tk.Toplevel):
 
+    MIN_HEIGHT = 250
+    MIN_WIDTH = 1270
+
     _COLUMNS = {
         'id':('ID', 'id_width'),
         'title':(_('Title'), 'title_width'),
@@ -35,6 +38,7 @@ class SnapshotView(tk.Toplevel):
         self._ctrl = controller
         self.prefs = prefs
         self.geometry(f"{self.prefs['window_geometry']}")
+        self.minsize(self.MIN_WIDTH, self.MIN_HEIGHT)
 
         self.title(FEATURE)
         self.lift()

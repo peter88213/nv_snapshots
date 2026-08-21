@@ -61,8 +61,6 @@ class SnapshotDialog(ModalDialog):
             command=self._open_help
         ).pack(padx=5, pady=5, side='right')
 
-        self.resizable(False, False)
-
         # Set Key bindings.
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
 
