@@ -7,6 +7,17 @@
 
 ### Version 5.4.4
 
+Update for the novelibre 5.65 `ModalDialog`.
+
+- Resizing the snapshot manager window is now limited.
+- The snapshot dialog is no longer resizable.
+
+API: 5.63
+Based on novelibre 5.65.1
+
+
+### Version 5.4.4
+
 - Update for better "dark mode" support.
 
 API: 5.63
