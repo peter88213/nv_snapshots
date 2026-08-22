@@ -5,9 +5,7 @@
 ## Changelog
 
 
-### Version 5.4.4
-
-Update for the novelibre 5.65 `ModalDialog`.
+### Version 5.4.5
 
 - Resizing the snapshot manager window is now limited.
 - The snapshot dialog is no longer resizable.
