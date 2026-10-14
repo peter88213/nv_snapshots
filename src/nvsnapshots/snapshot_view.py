@@ -8,7 +8,6 @@ from datetime import datetime
 from tkinter import ttk
 
 from nvlib.gui.widgets.index_card import IndexCard
-from nvlib.novx_globals import STATUS
 from nvsnapshots.nvsnapshots_globals import FEATURE
 from nvsnapshots.nvsnapshots_locale import _
 from nvsnapshots.nvsnapshots_menu import NvsnapshotsMenu
@@ -127,6 +126,7 @@ class SnapshotView(tk.Toplevel):
             self._treeView.delete(node)
 
     def build_tree(self):
+        statusLabels = self._mdl.nvService.get_status_labels()
         self.reset_tree()
         for snapshotId in self.snapshots:
             try:
@@ -135,7 +135,7 @@ class SnapshotView(tk.Toplevel):
                 ).strftime('%c')
                 status = self.snapshots[snapshotId]['work phase']
                 if status is not None:
-                    workPhase = STATUS[status]
+                    workPhase = statusLabels[status]
                 else:
                     workPhase = _('Undefined')
             except:
