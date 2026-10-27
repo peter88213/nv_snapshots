@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.4.6
+
+- Rebuilt the plugin using the improved IndexCard from novelibre 5.66.8.
+
+API: 5.63
+Based on novelibre 5.66.8
+
+
 ### Version 5.4.5
 
 - Resizing the snapshot manager window is now limited.
